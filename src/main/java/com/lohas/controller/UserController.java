@@ -1,5 +1,6 @@
 package com.lohas.controller;
 
+import com.lohas.model.User;
 import com.lohas.request.LoginRequest;
 import com.lohas.service.UserService;
 import com.lohas.view.LoginStatus;
@@ -9,10 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,7 +27,13 @@ public class UserController {
     @PostMapping(path="/login")
     @ResponseBody
     public LoginStatus login(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
-        return userService.logIn(loginRequest);
+        return userService.logIn(loginRequest,response);
+    }
+
+    @GetMapping(path="/test")
+    @ResponseBody
+    public String test(){
+        return userService.test().getRegisterTime().toString();
     }
 
 

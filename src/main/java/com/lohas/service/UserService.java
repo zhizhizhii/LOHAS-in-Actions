@@ -1,5 +1,8 @@
 package com.lohas.service;
 
+import com.lohas.config.WxInfoConfig;
+import com.lohas.dao.UserDAO;
+import com.lohas.model.User;
 import com.lohas.request.LoginRequest;
 import com.lohas.utils.HttpRequest;
 import com.lohas.utils.JWTUtils;
@@ -11,25 +14,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@Configuration
-@Component
 public class UserService {
 
-    @Value("${com.lohas.WXAPPID}")
-    private String WXAPPID;
-    @Value("${com.lohas.WXSECRET}")
-    private String WXSECRET;
-    @Value("${com.lohas.WXGRANTTYPE}")
-    private String WXGRANTTYPE;
+    @Autowired
+    UserDAO userDAO;
 
     @Autowired
-    JWTUtils jwtUtils;
+    WxInfoConfig wxInfoConfig;
 
-    public LoginStatus logIn(LoginRequest body){
+    public LoginStatus logIn(LoginRequest body, HttpServletResponse response){
 
         LoginStatus loginStatus = new LoginStatus();
 
@@ -37,10 +36,10 @@ public class UserService {
             String code = body.getCode();
 
             //定义参数
-            String params = "appid=" + WXAPPID
-                    + "&secret=" + WXSECRET
+            String params = "appid=" + wxInfoConfig.getWXAPPID()
+                    + "&secret=" + wxInfoConfig.getWXSECRET()
                     + "&js_code=" + code
-                    + "&grant_type=" + WXGRANTTYPE;
+                    + "&grant_type=" + wxInfoConfig.getWXGRANTTYPE();
 
             //向wechat服务器发送https请求
             String result = HttpRequest.sendGet(
@@ -55,15 +54,33 @@ public class UserService {
             else {
                 String openId = jsonObj.getString("openid");
 
-                Map<String,String> payload = new HashMap<String,String>();
+                User user = userDAO.findUserByOpenId(openId);
 
-                payload.put("openid",openId);
+                Map<String,String> payload = new HashMap<String,String>();
+                //此时代表用户是第一次登录
+                if(user==null){
+                    loginStatus.setLogin_for_first(1);
+                    //向数据库表中新建一条记录
+                    User u = new User();
+                    u.setOpenId(openId);
+                    u.setRegisterTime(new Date());
+                    userDAO.save(u);
+                    payload.put("user_id",u.getUserId().toString());
+                }
+                else{
+                    payload.put("user_id",user.getUserId().toString());
+                    loginStatus.setLogin_for_first(0);
+                }
 
                 //token签发完成
-                String token = jwtUtils.getToken(payload);
+                String token = JWTUtils.getToken(payload);
+
                 loginStatus.setState(true);
                 loginStatus.setMsg("登录成功！");
-                loginStatus.setToken(token);
+
+                //在header中设置token
+                response.setHeader("token",token);
+
                 return loginStatus;
             }
 
@@ -73,5 +90,9 @@ public class UserService {
         loginStatus.setState(false);
         loginStatus.setMsg("登录失败！");
         return loginStatus;
+    }
+
+    public User test(){
+        return userDAO.findUserByOpenId("fd");
     }
 }

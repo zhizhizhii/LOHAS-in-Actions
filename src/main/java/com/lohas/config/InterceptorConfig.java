@@ -13,7 +13,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
         String[] addPathPatterns = {"/api/**"};
 
-        String[] excludePathPatterns = {"/api/user/login"};
+        String[] excludePathPatterns = {"/api/user/login","/api/user/test"};
 
         registry.addInterceptor(new JWTInterceptor())
                 .addPathPatterns(addPathPatterns)

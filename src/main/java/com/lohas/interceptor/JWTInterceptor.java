@@ -16,17 +16,10 @@ import java.util.Map;
 public class JWTInterceptor implements HandlerInterceptor {
 
     @Autowired
-    JWTUtils jwtUtils;
+    private JWTUtils jwtUtils;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String url = request.getRequestURL().toString();
-        String method = request.getMethod();
-        String uri = request.getRequestURI();
-        System.out.println(url);
-        System.out.println(method);
-        System.out.println(uri);
-
         Map<String,Object> map = new HashMap<>();
 
         String token = request.getHeader("token");

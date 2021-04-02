@@ -1,4 +1,4 @@
-package com.lohas.swagger;
+package com.lohas.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
