@@ -63,9 +63,11 @@ public class UserService {
                     u.setRegisterTime(new Date());
                     userDAO.save(u);
                     payload.put("user_id",u.getUserId().toString());
+                    payload.put("role","1");
                 }
                 else{
                     payload.put("user_id",user.getUserId().toString());
+                    payload.put("role","1");
                     loginStatus.setLogin_for_first(0);
                 }
 

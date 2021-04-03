@@ -5,8 +5,6 @@ import com.lohas.request.LoginRequest;
 import com.lohas.service.UserService;
 import com.lohas.view.LoginStatus;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

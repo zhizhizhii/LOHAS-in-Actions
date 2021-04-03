@@ -1,6 +1,7 @@
 package com.lohas.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,10 @@ public class Shop {
     private String password;
 
     private String salt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "register_time")
+    private Date registerTime;
 
     @OneToOne(mappedBy = "shop",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private ShopInfo shopInfo;
@@ -66,6 +71,14 @@ public class Shop {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 
     public ShopInfo getShopInfo() {
