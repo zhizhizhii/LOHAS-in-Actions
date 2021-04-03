@@ -20,8 +20,8 @@ public class DDLProduct {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "product_info")
-    private String productInfo;
+    @Column(name = "product_intro")
+    private String productIntro;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "product_pubdate")
@@ -69,12 +69,12 @@ public class DDLProduct {
         this.productName = productName;
     }
 
-    public String getProductInfo() {
-        return productInfo;
+    public String getProductIntro() {
+        return productIntro;
     }
 
-    public void setProductInfo(String productInfo) {
-        this.productInfo = productInfo;
+    public void setProductIntro(String productIntro) {
+        this.productIntro = productIntro;
     }
 
     public Date getProductPubdate() {
