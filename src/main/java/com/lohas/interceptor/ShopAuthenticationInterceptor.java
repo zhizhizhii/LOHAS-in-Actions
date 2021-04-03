@@ -28,7 +28,7 @@ public class ShopAuthenticationInterceptor implements HandlerInterceptor {
             DecodedJWT decodedJWT = jwtUtils.getTokenInfo(token);
             //0_商家; 1_普通用户
             String role = decodedJWT.getClaim("role").asString();
-            if(role != "0"){
+            if(!role.equals("0")){
                 throw new AuthenticationException("无权限");
             }
             return true;
