@@ -20,14 +20,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns(addPathPatterns)
                 .excludePathPatterns(excludePathPatterns);
 
-//        //只有商家才能访问的接口
-//        String[] addPathPatterns_forshop = {""};
-//        registry.addInterceptor(new ShopAuthenticationInterceptor())
-//                .addPathPatterns(addPathPatterns_forshop);
-//
+        //只有商家才能访问的接口
+        String[] addPathPatterns_forshop = {""};
+        registry.addInterceptor(new ShopAuthenticationInterceptor())
+                .addPathPatterns(addPathPatterns_forshop);
+
         //只有普通用户才能访问的接口
         String[] addPathPatterns_foruser = {"/api/userinfo/update"};
-        registry.addInterceptor(new ShopAuthenticationInterceptor())
+        registry.addInterceptor(new UserAuthenticationInterceptor())
                 .addPathPatterns(addPathPatterns_foruser);
 
     }
