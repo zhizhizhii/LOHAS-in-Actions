@@ -21,16 +21,14 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
-    @ApiOperation(value="商家注册",notes="保留接口，可用，请在后续登录时将token放入" +
-            "（ 请求头！ ）中。")
+    @ApiOperation(value="商家注册",notes="保留接口，可用" )
     @PostMapping(path="/register")
     @ResponseBody
     public Status register(@RequestBody ShopRequest shopRequest, HttpServletResponse response){
         return shopService.register(shopRequest);
     }
 
-    @ApiOperation(value="商家注册",notes="保留接口，可用，请在后续登录时将token放入" +
-            "（ 请求头！ ）中。")
+    @ApiOperation(value="商家登录",notes="商家登录接口，token会放在header中返回" )
     @PostMapping(path="/login")
     @ResponseBody
     public Status login(@RequestBody ShopRequest shopRequest, HttpServletResponse response){

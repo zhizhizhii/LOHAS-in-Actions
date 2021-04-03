@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class LoginRequest {
 
-    @ApiModelProperty("wechat服务器返回前端的状态码")
+    @ApiModelProperty(value="wechat服务器返回前端的状态码")
     private String code;
 
     public String getCode() {

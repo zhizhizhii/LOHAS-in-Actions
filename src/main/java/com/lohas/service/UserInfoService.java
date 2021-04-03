@@ -5,6 +5,7 @@ import com.lohas.dao.UserInfoDAO;
 import com.lohas.model.UserInfo;
 import com.lohas.request.UserInfoRequest;
 import com.lohas.utils.JWTUtils;
+import com.lohas.view.Status;
 import com.lohas.view.UserInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,17 +42,17 @@ public class UserInfoService {
            return userInfoView;
         }
 
-        public Map<String,String> updateUserInfo(UserInfoRequest userInfoRequest,HttpServletRequest request){
+        public Status updateUserInfo(UserInfoRequest userInfoRequest,HttpServletRequest request){
 
             Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
 
             UserInfo ui = userInfoDAO.getUserInfoByUser(userDAO.findUserByUserId(userId));
 
-            Map<String,String> map = new HashMap<String, String>();
+            Status status = new Status();
 
             if(ui==null){
-                map.put("status","error");
-                map.put("msg","用户不存在");
+                status.setState(false);
+                status.setMsg("用户不存在");
             }
             else{
                 UserInfo userInfo = new UserInfo();
@@ -61,10 +62,9 @@ public class UserInfoService {
                 if(userInfoRequest.getAvatar()!=null)userInfo.setAvatar(userInfoRequest.getAvatar());
                 if(userInfoRequest.getPhoneNumber()!=null)userInfo.setPhoneNumber(userInfoRequest.getPhoneNumber());
                 userInfoDAO.save(userInfo);
-
-                map.put("status","done");
-                map.put("msg","修改个人信息成功");
+                status.setState(true);
+                status.setMsg("修改个人信息成功");
             }
-            return map;
+            return status;
         }
 }

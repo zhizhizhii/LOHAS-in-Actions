@@ -4,10 +4,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Status {
 
-    @ApiModelProperty("注册状态")
+    @ApiModelProperty("状态")
     private Boolean state;
 
-    @ApiModelProperty("注册提示信息")
+    @ApiModelProperty("提示信息")
     private String msg;
 
     public Boolean getState() {
