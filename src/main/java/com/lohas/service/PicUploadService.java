@@ -69,7 +69,7 @@ public class PicUploadService {
 
     private String getFilePath(String sourceFileName) {
         DateTime dateTime = new DateTime();
-        return "/images/"+
+        return "images/"+
                 dateTime.toString("yyyy") + "/" +
                 dateTime.toString("MM") + "/" +
                 dateTime.toString("dd") + "/" +

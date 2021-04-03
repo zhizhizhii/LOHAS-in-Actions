@@ -1,15 +1,16 @@
 package com.lohas.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 
 @Entity
-public class UserInfo {
+@Table(name = "user_info")
+public class UserInfo{
 
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "user_info_id")
+    private Integer userInfoId;
 
     @Column(name = "user_name")
     private String userName;
@@ -21,12 +22,24 @@ public class UserInfo {
 
     private String avatar;
 
-    public Integer getUserId() {
-        return userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Integer getUserInfoId() {
+        return userInfoId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserInfoId(Integer userInfoId) {
+        this.userInfoId = userInfoId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getUserName() {

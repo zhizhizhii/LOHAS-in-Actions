@@ -8,10 +8,7 @@ import com.lohas.utils.HttpRequest;
 import com.lohas.utils.JWTUtils;
 import com.lohas.view.LoginStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +20,10 @@ import java.util.Map;
 public class UserService {
 
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    WxInfoConfig wxInfoConfig;
+    private WxInfoConfig wxInfoConfig;
 
     public LoginStatus logIn(LoginRequest body, HttpServletResponse response){
 
@@ -92,7 +89,4 @@ public class UserService {
         return loginStatus;
     }
 
-    public User test(){
-        return userDAO.findUserByOpenId("fd");
-    }
 }

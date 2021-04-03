@@ -30,12 +30,5 @@ public class UserController {
         return userService.logIn(loginRequest,response);
     }
 
-    @GetMapping(path="/test")
-    @ResponseBody
-    public String test(){
-        return userService.test().getRegisterTime().toString();
-    }
-
-
 
 }

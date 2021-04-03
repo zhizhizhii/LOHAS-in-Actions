@@ -1,5 +1,6 @@
 package com.lohas.service;
 
+import com.lohas.dao.UserDAO;
 import com.lohas.dao.UserInfoDAO;
 import com.lohas.model.UserInfo;
 import com.lohas.request.UserInfoRequest;
@@ -17,7 +18,10 @@ import java.util.Map;
 public class UserInfoService {
 
     @Autowired
-    UserInfoDAO userInfoDAO;
+    private UserInfoDAO userInfoDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
         public UserInfoView getUserInfo(HttpServletRequest request){
 
@@ -25,7 +29,7 @@ public class UserInfoService {
 
            UserInfoView userInfoView = new UserInfoView();
 
-           UserInfo ui = userInfoDAO.getUserInfoByUserId(userId);
+           UserInfo ui = userInfoDAO.getUserInfoByUser(userDAO.findUserByUserId(userId));
 
            if(ui!=null){
                userInfoView.setUserName(ui.getUserName());
@@ -41,7 +45,7 @@ public class UserInfoService {
 
             Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
 
-            UserInfo ui = userInfoDAO.getUserInfoByUserId(userId);
+            UserInfo ui = userInfoDAO.getUserInfoByUser(userDAO.findUserByUserId(userId));
 
             Map<String,String> map = new HashMap<String, String>();
 
@@ -51,7 +55,7 @@ public class UserInfoService {
             }
             else{
                 UserInfo userInfo = new UserInfo();
-                userInfo.setUserId(userId);
+                userInfo.setUser(userDAO.findUserByUserId(userId));
                 if(userInfoRequest.getUserName()!=null)userInfo.setUserName(userInfoRequest.getUserName());
                 if(userInfoRequest.getSex()!=null)userInfo.setSex(userInfoRequest.getSex());
                 if(userInfoRequest.getAvatar()!=null)userInfo.setAvatar(userInfoRequest.getAvatar());
