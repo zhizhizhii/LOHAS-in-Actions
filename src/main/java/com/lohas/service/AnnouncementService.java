@@ -1,14 +1,21 @@
 package com.lohas.service;
 
 import com.lohas.dao.ShopAnnouncementDAO;
+import com.lohas.dao.ShopDAO;
 import com.lohas.exception.AnnouncementDoesNotExistException;
+import com.lohas.model.Shop;
 import com.lohas.model.ShopAnnouncement;
 import com.lohas.request.CreateAnnouncementRequest;
 import com.lohas.request.DeleteAnnouncementRequest;
+import com.lohas.request.QueryAnnouncementByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
+import com.lohas.view.AnnouncementItem;
+import com.lohas.view.AnnouncementPage;
 import com.lohas.view.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import sun.jvm.hotspot.debugger.Page;
 
 import java.util.Date;
 
@@ -17,6 +24,8 @@ public class AnnouncementService {
 
     @Autowired
     ShopAnnouncementDAO shopAnnouncementDAO;
+    @Autowired
+    ShopDAO shopDAO;
 
     public Status createAnnouncement(CreateAnnouncementRequest announcementRequest){
         Status status = new Status();
@@ -76,5 +85,12 @@ public class AnnouncementService {
             status.setMsg("更新失败");
         }
         return status;
+    }
+
+    public AnnouncementPage getAnnouncementOfOneShop(QueryAnnouncementByShopRequest queryAnnouncementByShopRequest){
+        Shop shop = shopDAO.findShopByShopId(queryAnnouncementByShopRequest.getShopId());
+        return new AnnouncementPage(shopAnnouncementDAO.findAllByShop(shop,
+                PageRequest.of(queryAnnouncementByShopRequest.getPageNum() - 1, queryAnnouncementByShopRequest.getPageSize())));
+
     }
 }
