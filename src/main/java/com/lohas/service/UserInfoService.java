@@ -2,6 +2,7 @@ package com.lohas.service;
 
 import com.lohas.dao.UserDAO;
 import com.lohas.dao.UserInfoDAO;
+import com.lohas.model.User;
 import com.lohas.model.UserInfo;
 import com.lohas.request.UserInfoRequest;
 import com.lohas.utils.JWTUtils;
@@ -46,17 +47,22 @@ public class UserInfoService {
 
             Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
 
-            UserInfo ui = userInfoDAO.getUserInfoByUser(userDAO.findUserByUserId(userId));
-
+            User u = userDAO.findUserByUserId(userId);
             Status status = new Status();
 
-            if(ui==null){
+            if(u==null){
                 status.setState(false);
                 status.setMsg("用户不存在");
             }
             else{
                 UserInfo userInfo = new UserInfo();
-                userInfo.setUser(userDAO.findUserByUserId(userId));
+                UserInfo ui = userInfoDAO.getUserInfoByUser(u);
+                if(ui == null){
+                    userInfo.setUser(u);
+                }
+                else{
+                    userInfo = ui;
+                }
                 if(userInfoRequest.getUserName()!=null)userInfo.setUserName(userInfoRequest.getUserName());
                 if(userInfoRequest.getSex()!=null)userInfo.setSex(userInfoRequest.getSex());
                 if(userInfoRequest.getAvatar()!=null)userInfo.setAvatar(userInfoRequest.getAvatar());

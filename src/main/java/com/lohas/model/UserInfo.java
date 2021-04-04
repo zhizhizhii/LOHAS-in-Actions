@@ -10,6 +10,7 @@ public class UserInfo{
 
     @Id
     @Column(name = "user_info_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userInfoId;
 
     @Column(name = "user_name")

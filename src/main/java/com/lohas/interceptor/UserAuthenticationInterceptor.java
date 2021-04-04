@@ -27,7 +27,8 @@ public class UserAuthenticationInterceptor implements HandlerInterceptor {
             DecodedJWT decodedJWT = jwtUtils.getTokenInfo(token);
             //0_商家; 1_普通用户
             String role = decodedJWT.getClaim("role").asString();
-            if(role != "0"){
+            System.out.println("role = " +decodedJWT.getClaim("role").asString());
+            if(!role.equals("1")){
                 throw new AuthenticationException("无权限");
             }
             return true;
