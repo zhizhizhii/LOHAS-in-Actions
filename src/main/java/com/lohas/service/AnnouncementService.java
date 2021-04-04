@@ -9,6 +9,7 @@ import com.lohas.request.CreateAnnouncementRequest;
 import com.lohas.request.DeleteAnnouncementRequest;
 import com.lohas.request.QueryAnnouncementByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
+import com.lohas.utils.JWTUtils;
 import com.lohas.view.AnnouncementItem;
 import com.lohas.view.AnnouncementPage;
 import com.lohas.view.Status;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import sun.jvm.hotspot.debugger.Page;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Service
@@ -27,12 +29,13 @@ public class AnnouncementService {
     @Autowired
     ShopDAO shopDAO;
 
-    public Status createAnnouncement(CreateAnnouncementRequest announcementRequest){
+    public Status createAnnouncement(CreateAnnouncementRequest announcementRequest, HttpServletRequest request){
         Status status = new Status();
         try {
+            Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
             ShopAnnouncement shopAnnouncement = new ShopAnnouncement();
             shopAnnouncement.setContent(announcementRequest.getContent());
-            shopAnnouncement.setShop(announcementRequest.getShop());
+            shopAnnouncement.setShop(shopDAO.findShopByShopId(shopId));
             shopAnnouncement.setTitle(announcementRequest.getTitle());
             shopAnnouncement.setPublishTime(new Date());
 
@@ -48,12 +51,12 @@ public class AnnouncementService {
         return status;
     }
 
-    public Status updateAnnouncement(UpdateAnnouncementRequest updateAnnouncementRequest){
+    public Status updateAnnouncement(UpdateAnnouncementRequest updateAnnouncementRequest, HttpServletRequest request){
         Status status = new Status();
         try {
             ShopAnnouncement shopAnnouncement = shopAnnouncementDAO.findShopAnnouncementByAnnouncementId(updateAnnouncementRequest.getAnnouncementId());
-            if(shopAnnouncement==null){
-                //TODO: 检验是否为商家自身
+            Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
+            if(shopAnnouncement==null || !shopAnnouncement.getShop().getShopId().equals(shopId)){
                 throw new AnnouncementDoesNotExistException();
             }
             shopAnnouncement.setTitle(updateAnnouncementRequest.getTitle());
@@ -69,28 +72,27 @@ public class AnnouncementService {
         return status;
     }
 
-    public Status deleteAnnouncement(DeleteAnnouncementRequest deleteAnnouncementRequest){
+    public Status deleteAnnouncement(DeleteAnnouncementRequest deleteAnnouncementRequest, HttpServletRequest request){
         Status status =new Status();
         try {
             ShopAnnouncement shopAnnouncement = shopAnnouncementDAO.findShopAnnouncementByAnnouncementId(deleteAnnouncementRequest.getAnnouncementId());
-            if(shopAnnouncement==null){
-                //TODO: 检验是否为商家自身
+            Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
+            if(shopAnnouncement==null || !shopAnnouncement.getShop().getShopId().equals(shopId)){
                 throw new AnnouncementDoesNotExistException();
             }
             shopAnnouncementDAO.delete(shopAnnouncement);
             status.setState(true);
-            status.setMsg("更新成功");
+            status.setMsg("删除成功");
         } catch (AnnouncementDoesNotExistException e) {
             status.setState(false);
-            status.setMsg("更新失败");
+            status.setMsg("删除失败");
         }
         return status;
     }
 
-    public AnnouncementPage getAnnouncementOfOneShop(QueryAnnouncementByShopRequest queryAnnouncementByShopRequest){
+    public AnnouncementPage getAnnouncementOfOneShop(QueryAnnouncementByShopRequest queryAnnouncementByShopRequest, HttpServletRequest request){
         Shop shop = shopDAO.findShopByShopId(queryAnnouncementByShopRequest.getShopId());
         return new AnnouncementPage(shopAnnouncementDAO.findAllByShop(shop,
                 PageRequest.of(queryAnnouncementByShopRequest.getPageNum() - 1, queryAnnouncementByShopRequest.getPageSize())));
-
     }
 }

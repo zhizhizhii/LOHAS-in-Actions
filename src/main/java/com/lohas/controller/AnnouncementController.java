@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Api(tags = "商家公告模块")
 @Controller
 @RequestMapping(path="/api/announcement/")
@@ -24,30 +26,30 @@ public class AnnouncementController {
     AnnouncementService announcementService;
 
     @ApiOperation(value = "发布公告")
-    @PostMapping(path="/createannouncement")
+    @PostMapping(path="/create")
     @ResponseBody
-    public Status createAnnouncement(@RequestBody CreateAnnouncementRequest announcementRequest){
-        return announcementService.createAnnouncement(announcementRequest);
+    public Status createAnnouncement(@RequestBody CreateAnnouncementRequest announcementRequest, HttpServletRequest request){
+        return announcementService.createAnnouncement(announcementRequest, request);
     }
 
     @ApiOperation(value = "修改公告")
-    @PostMapping(path="/updateannouncement")
+    @PostMapping(path="/update")
     @ResponseBody
-    public Status updateAnnouncement(@RequestBody UpdateAnnouncementRequest updateAnnouncementRequest){
-        return announcementService.updateAnnouncement(updateAnnouncementRequest);
+    public Status updateAnnouncement(@RequestBody UpdateAnnouncementRequest updateAnnouncementRequest, HttpServletRequest request){
+        return announcementService.updateAnnouncement(updateAnnouncementRequest, request);
     }
 
     @ApiOperation(value = "删除公告")
-    @PostMapping(path="/deleteannouncement")
+    @PostMapping(path="/delete")
     @ResponseBody
-    public Status deleteAnnouncement(@RequestBody DeleteAnnouncementRequest deleteAnnouncementRequest){
-        return announcementService.deleteAnnouncement(deleteAnnouncementRequest);
+    public Status deleteAnnouncement(@RequestBody DeleteAnnouncementRequest deleteAnnouncementRequest, HttpServletRequest request){
+        return announcementService.deleteAnnouncement(deleteAnnouncementRequest, request);
     }
 
     @ApiOperation(value = "查询店家的公告")
-    @PostMapping(path="/queryannouncement")
+    @PostMapping(path="/query")
     @ResponseBody
-    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryAnnouncementByShopRequest queryAnnouncementByShopRequest){
-        return announcementService.getAnnouncementOfOneShop(queryAnnouncementByShopRequest);
+    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryAnnouncementByShopRequest queryAnnouncementByShopRequest, HttpServletRequest request){
+        return announcementService.getAnnouncementOfOneShop(queryAnnouncementByShopRequest, request);
     }
 }
