@@ -1,5 +1,6 @@
 package com.lohas.service;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.dao.ShopAnnouncementDAO;
 import com.lohas.dao.ShopDAO;
 import com.lohas.exception.AnnouncementDoesNotExistException;
@@ -7,16 +8,15 @@ import com.lohas.model.Shop;
 import com.lohas.model.ShopAnnouncement;
 import com.lohas.request.CreateAnnouncementRequest;
 import com.lohas.request.DeleteAnnouncementRequest;
-import com.lohas.request.QueryAnnouncementByShopRequest;
+import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
 import com.lohas.utils.JWTUtils;
-import com.lohas.view.AnnouncementItem;
 import com.lohas.view.AnnouncementPage;
 import com.lohas.view.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import sun.jvm.hotspot.debugger.Page;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -90,9 +90,15 @@ public class AnnouncementService {
         return status;
     }
 
-    public AnnouncementPage getAnnouncementOfOneShop(QueryAnnouncementByShopRequest queryAnnouncementByShopRequest, HttpServletRequest request){
-        Shop shop = shopDAO.findShopByShopId(queryAnnouncementByShopRequest.getShopId());
+    public AnnouncementPage getAnnouncementOfOneShop(QueryByShopRequest queryByShopRequest, HttpServletRequest request){
+        Shop shop = shopDAO.findShopByShopId(queryByShopRequest.getShopId());
         return new AnnouncementPage(shopAnnouncementDAO.findAllByShop(shop,
-                PageRequest.of(queryAnnouncementByShopRequest.getPageNum() - 1, queryAnnouncementByShopRequest.getPageSize())));
+                PageRequest.of(queryByShopRequest.getPageNum() - 1, queryByShopRequest.getPageSize())));
+    }
+
+    public AnnouncementPage getAnnouncementOfMine(PaginationSend paginationSend ,HttpServletRequest request){
+        Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
+        return new AnnouncementPage(shopAnnouncementDAO.findAllByShop(shopDAO.findShopByShopId(shopId),
+                PageRequest.of(paginationSend.getPageNum() - 1, paginationSend.getPageSize())));
     }
 }

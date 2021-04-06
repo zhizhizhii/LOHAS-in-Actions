@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.common.PaginationSend;
 import io.swagger.annotations.ApiModelProperty;
 
-public class QueryAnnouncementByShopRequest extends PaginationSend {
+public class QueryByShopRequest extends PaginationSend {
 
     @ApiModelProperty(value = "查询的商店id")
     @JsonProperty("shopid")

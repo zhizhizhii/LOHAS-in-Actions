@@ -1,14 +1,19 @@
 package com.lohas.service;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.dao.ShopDAO;
 import com.lohas.dao.UserCommentDAO;
 import com.lohas.dao.UserDAO;
+import com.lohas.dao.inter.CommentforUserInterface;
+import com.lohas.dao.inter.UserCommentInterface;
 import com.lohas.exception.AnnouncementDoesNotExistException;
 import com.lohas.model.*;
 import com.lohas.request.*;
 import com.lohas.utils.JWTUtils;
-import com.lohas.view.Status;
+import com.lohas.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +71,7 @@ public class CommentService {
     }
 
     public Status deleteComment(DeleteCommentRequest deleteCommentRequest, HttpServletRequest request){
-        Status status =new Status();
+        Status status = new Status();
         Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
         try {
             UserComment userComment = userCommentDAO.findByCommentId(deleteCommentRequest.getCommentId());
@@ -83,5 +88,44 @@ public class CommentService {
         return status;
     }
 
+    public CommentPage queryCommentByShop(QueryByShopRequest queryByShopRequest, HttpServletRequest request){
+
+        Integer shopId = queryByShopRequest.getShopId();
+
+        Page<UserCommentInterface> page = userCommentDAO.findCommentByShop(shopId,
+                PageRequest.of(
+                        queryByShopRequest.getPageNum() - 1,
+                        queryByShopRequest.getPageSize()
+                )
+        );
+        return new CommentPage(page);
+    }
+
+    public CommentforUserPage queryCommentByUser(PaginationSend paginationSend, HttpServletRequest request){
+
+        Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
+
+        Page<CommentforUserInterface> page = userCommentDAO.findCommentByUser(userId,
+                PageRequest.of(
+                        paginationSend.getPageNum() - 1,
+                        paginationSend.getPageSize()
+                )
+        );
+
+        return new CommentforUserPage(page);
+    }
+
+    public CommentPage queryCommentofMine(PaginationSend paginationSend, HttpServletRequest request){
+
+        Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
+
+        Page<UserCommentInterface> page = userCommentDAO.findCommentByShop(shopId,
+                PageRequest.of(
+                        paginationSend.getPageNum() - 1,
+                        paginationSend.getPageSize()
+                )
+        );
+        return new CommentPage(page);
+    }
 
 }

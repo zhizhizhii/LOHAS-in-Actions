@@ -27,4 +27,6 @@ public class UpdateForsaleProductRequest {
     private Double originCost;
 
     private Double currentCost;
+
+    private String productPic;
 }

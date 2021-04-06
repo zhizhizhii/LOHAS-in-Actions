@@ -1,8 +1,9 @@
 package com.lohas.controller;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateForsaleProductRequest;
 import com.lohas.request.DeleteForsaleProductRequest;
-import com.lohas.request.QueryAnnouncementByShopRequest;
+import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateForsaleProductRequest;
 import com.lohas.service.ForsaleProductService;
 import com.lohas.view.ForsaleProductPage;
@@ -49,7 +50,15 @@ public class ForsaleProductController {
     @ApiOperation(value = "查询店家的折扣商品")
     @PostMapping(path="/query")
     @ResponseBody
-    public ForsaleProductPage getForsaleProductOfOneShop(@RequestBody QueryAnnouncementByShopRequest queryForsaleProductByShopRequest, HttpServletRequest request){
+    public ForsaleProductPage getForsaleProductOfOneShop(@RequestBody QueryByShopRequest queryForsaleProductByShopRequest, HttpServletRequest request){
         return forsaleProductService.getForsaleProductOfOneShop(queryForsaleProductByShopRequest, request);
+    }
+
+    @ApiOperation(value="商家获取自己折扣商品",notes="用于商家获取自己的折扣商品" )
+    @PostMapping(path="/getmine")
+    @ResponseBody
+    public ForsaleProductPage getForsaleProductOfMine(@RequestBody PaginationSend paginationSend,HttpServletRequest request){
+
+        return forsaleProductService.getMyProduct(paginationSend, request);
     }
 }

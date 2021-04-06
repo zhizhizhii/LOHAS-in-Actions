@@ -1,17 +1,16 @@
 package com.lohas.controller;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateAnnouncementRequest;
 import com.lohas.request.CreateCollectionRequest;
 import com.lohas.service.CollectionService;
+import com.lohas.view.ShopBriefInfoPage;
 import com.lohas.view.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,4 +34,12 @@ public class CollectController {
     public Status deleteCollection(@RequestBody CreateCollectionRequest createCollectionRequest, HttpServletRequest request){
         return collectionService.deleteCollection(createCollectionRequest, request);
     }
+
+    @ApiOperation(value = "获取收藏信息")
+    @PostMapping(path="/get")
+    @ResponseBody
+    public ShopBriefInfoPage getCollection(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+        return collectionService.getCollection(paginationSend, request);
+    }
+
 }

@@ -38,4 +38,8 @@ public class UpdateDDLProductRequest {
     @ApiModelProperty(value = "过期日期")
     @JsonProperty("expirtydate")
     private Date expiryDate;
+
+    @ApiModelProperty(value = "过期日期")
+    @JsonProperty("expirtydate")
+    private String productPic;
 }

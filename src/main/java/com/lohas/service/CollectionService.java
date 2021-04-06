@@ -1,15 +1,22 @@
 package com.lohas.service;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.dao.ShopDAO;
+import com.lohas.dao.ShopInfoDAO;
 import com.lohas.dao.UserCollectDAO;
 import com.lohas.dao.UserDAO;
 import com.lohas.model.Shop;
+import com.lohas.model.ShopInfo;
 import com.lohas.model.User;
 import com.lohas.model.UserCollect;
 import com.lohas.request.CreateCollectionRequest;
 import com.lohas.utils.JWTUtils;
+import com.lohas.view.ShopBriefInfoPage;
+import com.lohas.view.ShopDetailedInfo;
 import com.lohas.view.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +29,8 @@ public class CollectionService {
     UserDAO userDAO;
     @Autowired
     ShopDAO shopDAO;
+    @Autowired
+    ShopInfoDAO shopInfoDAO;
 
     public Status createCollection(CreateCollectionRequest createCollectionRequest, HttpServletRequest request){
         Status status = new Status();
@@ -60,5 +69,20 @@ public class CollectionService {
         }
         return status;
     }
+
+    public ShopBriefInfoPage getCollection(PaginationSend paginationSend, HttpServletRequest request){
+        //Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
+
+        Page<ShopInfo> page =  shopInfoDAO.findCollectInfo(2,
+                PageRequest.of(
+                        paginationSend.getPageNum() - 1,
+                        paginationSend.getPageSize()
+                )
+        );
+
+        return new ShopBriefInfoPage(page);
+    }
+
+
 
 }

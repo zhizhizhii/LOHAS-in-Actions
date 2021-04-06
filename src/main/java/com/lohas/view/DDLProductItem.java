@@ -43,6 +43,8 @@ public class DDLProductItem {
 
     private Double discount;
 
+    private String productPic;
+
     public DDLProductItem(DDLProduct ddlProduct){
         setCurrentCost(ddlProduct.getCurrentCost());
         setOriginCost(ddlProduct.getOriginCost());
@@ -53,5 +55,6 @@ public class DDLProductItem {
         setProductIntro(ddlProduct.getProductIntro());
         setDiscount(ddlProduct.getDiscount());
         setProductId(ddlProduct.getProductId());
+        setProductPic(ddlProduct.getProductPic());
     }
 }

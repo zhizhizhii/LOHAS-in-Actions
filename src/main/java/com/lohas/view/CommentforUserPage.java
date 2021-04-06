@@ -2,40 +2,33 @@ package com.lohas.view;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.common.PaginationReceive;
+import com.lohas.dao.inter.CommentforUserInterface;
 import com.lohas.dao.inter.UserCommentInterface;
-import com.lohas.model.ShopInfo;
-import com.lohas.model.UserComment;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentPage extends PaginationReceive {
+@Data
+public class CommentforUserPage extends PaginationReceive {
     @ApiModelProperty(value = "评论列表")
     @JsonProperty("commentitemlist")
-    private List<CommentItem> commentItemList;
+    private List<CommentforUserItem> commentItemList;
 
-    public List<CommentItem> getCommentItemList() {
-        return commentItemList;
-    }
 
-    public void setCommentItemList(List<CommentItem> commentItemList) {
-        this.commentItemList = commentItemList;
-    }
-
-    public CommentPage(Page<UserCommentInterface> userCommentPage){
+    public CommentforUserPage(Page<CommentforUserInterface> userCommentPage){
         setPageNum(userCommentPage.getNumber() + 1);
         setTotalPage(userCommentPage.getTotalPages());
 
-        List<CommentItem> list = new ArrayList<>();
-        for(UserCommentInterface item : userCommentPage){
-            CommentItem c = new CommentItem();
-            c.setUserId(item.getUser_Id());
+        List<CommentforUserItem> list = new ArrayList<>();
+        for(CommentforUserInterface item : userCommentPage){
+            CommentforUserItem c = new CommentforUserItem();
+            c.setShopId(item.getShop_Id());
             c.setCommentId(item.getComment_Id());
             c.setContent(item.getContent());
-            c.setUserName(item.getUser_Name());
-            System.out.println(item.getComment_Time());
+            c.setShopName(item.getShop_Name());
             c.setCommentTime(item.getComment_Time());
             c.setAvatar(item.getAvatar());
             list.add(c);

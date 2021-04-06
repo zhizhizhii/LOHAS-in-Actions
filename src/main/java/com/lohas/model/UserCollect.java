@@ -1,45 +1,28 @@
 package com.lohas.model;
 
+import com.lohas.model.pk.CollectPK;
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
+@Data
 @Table(name = "user_collect")
-public class UserCollect {
+public class UserCollect implements Serializable {
 
-    @Id
-    @Column(name="collect_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer collectId;
+    private static final long serialVersionUID = -8473363729158033277L;
+
+    @EmbeddedId
+    private CollectPK id = new CollectPK();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
+    @MapsId("userId")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="shop_id")
+    @MapsId("shopId")
     private Shop shop;
-
-    public Integer getCollectId() {
-        return collectId;
-    }
-
-    public void setCollectId(Integer collectId) {
-        this.collectId = collectId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
 }

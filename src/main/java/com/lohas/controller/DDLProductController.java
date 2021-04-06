@@ -1,11 +1,13 @@
 package com.lohas.controller;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateDDLProductRequest;
 import com.lohas.request.DeleteDDLProductRequest;
-import com.lohas.request.QueryAnnouncementByShopRequest;
+import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateDDLProductRequest;
 import com.lohas.service.DDLProductService;
 import com.lohas.view.DDLProductPage;
+import com.lohas.view.ForsaleProductPage;
 import com.lohas.view.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +51,14 @@ public class DDLProductController {
     @ApiOperation(value = "查询店家的临期商品")
     @PostMapping(path="/query")
     @ResponseBody
-    public DDLProductPage getDDLProductOfOneShop(@RequestBody QueryAnnouncementByShopRequest queryDDLProductByShopRequest, HttpServletRequest request){
+    public DDLProductPage getDDLProductOfOneShop(@RequestBody QueryByShopRequest queryDDLProductByShopRequest, HttpServletRequest request){
         return ddlProductService.getDDLProductOfOneShop(queryDDLProductByShopRequest, request);
+    }
+
+    @ApiOperation(value="商家获取临期商品",notes="用于商家获取自己的临期商品" )
+    @PostMapping(path="/getmine")
+    @ResponseBody
+    public DDLProductPage getDDLProductOfMine(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+        return ddlProductService.getMyProduct(paginationSend,request);
     }
 }

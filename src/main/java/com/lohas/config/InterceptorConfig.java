@@ -14,21 +14,21 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         //除register、login接口外所有接口验证token有效性
-        String[] addPathPatterns = {"/api/**"};
-        String[] excludePathPatterns = {"/api/user/login","/api/shop/**"};
-        registry.addInterceptor(new JWTInterceptor())
-                .addPathPatterns(addPathPatterns)
-                .excludePathPatterns(excludePathPatterns);
+//        String[] addPathPatterns = {"/api/**"};
+//        String[] excludePathPatterns = {"/api/user/login","/api/shop/**","/api/shopinfo/**"};
+//        registry.addInterceptor(new JWTInterceptor())
+//                .addPathPatterns(addPathPatterns)
+//                .excludePathPatterns(excludePathPatterns);
 
         //只有商家才能访问的接口
-        String[] addPathPatterns_forshop = {""};
-        registry.addInterceptor(new ShopAuthenticationInterceptor())
-                .addPathPatterns(addPathPatterns_forshop);
+//        String[] addPathPatterns_forshop = {""};
+//        registry.addInterceptor(new ShopAuthenticationInterceptor())
+//                .addPathPatterns(addPathPatterns_forshop);
 
         //只有普通用户才能访问的接口
-        String[] addPathPatterns_foruser = {"/api/userinfo/update"};
-        registry.addInterceptor(new UserAuthenticationInterceptor())
-                .addPathPatterns(addPathPatterns_foruser);
+//        String[] addPathPatterns_foruser = {"/api/userinfo/update"};
+//        registry.addInterceptor(new UserAuthenticationInterceptor())
+//                .addPathPatterns(addPathPatterns_foruser);
 
     }
 }

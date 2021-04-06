@@ -34,6 +34,8 @@ public class ForsaleProductItem {
 
     private Double discount;
 
+    private String productPic;
+
     public ForsaleProductItem(ForsaleProduct forsaleProduct){
         setProductId(forsaleProduct.getProductId());
         setCurrentCost(forsaleProduct.getCurrentCost());
@@ -42,5 +44,6 @@ public class ForsaleProductItem {
         setProductName(forsaleProduct.getProductName());
         setDiscount(forsaleProduct.getDiscount());
         setProductPubdate(forsaleProduct.getProductPubdate());
+        setProductPic(forsaleProduct.getProductPic());
     }
 }

@@ -1,8 +1,9 @@
 package com.lohas.controller;
 
+import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateAnnouncementRequest;
 import com.lohas.request.DeleteAnnouncementRequest;
-import com.lohas.request.QueryAnnouncementByShopRequest;
+import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
 import com.lohas.service.AnnouncementService;
 import com.lohas.view.AnnouncementPage;
@@ -49,7 +50,14 @@ public class AnnouncementController {
     @ApiOperation(value = "查询店家的公告")
     @PostMapping(path="/query")
     @ResponseBody
-    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryAnnouncementByShopRequest queryAnnouncementByShopRequest, HttpServletRequest request){
-        return announcementService.getAnnouncementOfOneShop(queryAnnouncementByShopRequest, request);
+    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryByShopRequest queryByShopRequest, HttpServletRequest request){
+        return announcementService.getAnnouncementOfOneShop(queryByShopRequest, request);
+    }
+
+    @ApiOperation(value = "商家查询自己的公告")
+    @PostMapping(path="/getmine")
+    @ResponseBody
+    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+        return announcementService.getAnnouncementOfMine(paginationSend, request);
     }
 }

@@ -34,4 +34,6 @@ public class CreateDDLProductRequest {
     @ApiModelProperty(value = "过期日期")
     @JsonProperty("expirtydate")
     private Date expiryDate;
+
+    private String productPic;
 }

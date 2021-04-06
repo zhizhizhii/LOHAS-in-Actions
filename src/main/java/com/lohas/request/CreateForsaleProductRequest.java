@@ -21,4 +21,6 @@ public class CreateForsaleProductRequest {
     private Double originCost;
 
     private Double currentCost;
+
+    private String productPic;
 }

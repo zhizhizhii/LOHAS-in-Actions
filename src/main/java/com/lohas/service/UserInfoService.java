@@ -46,7 +46,7 @@ public class UserInfoService {
         public Status updateUserInfo(UserInfoRequest userInfoRequest,HttpServletRequest request){
 
             Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
-
+            System.out.println(userId);
             User u = userDAO.findUserByUserId(userId);
             Status status = new Status();
 
