@@ -1,7 +1,9 @@
 package com.lohas.request;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 public class ShopRequest {
 
     @ApiModelProperty(value="注册/登录用户名")
@@ -10,19 +12,4 @@ public class ShopRequest {
     @ApiModelProperty(value="注册/登录密码")
     private String password;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -101,6 +101,30 @@ public class ShopInfoService {
 
     }
 
+    public ShopDetailedInfo getShopInfoMine(HttpServletRequest request){
+        Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
+
+        ShopInfo info = shopInfoDAO.findShopInfoByShop(shopDAO.findShopByShopId(shopId));
+        if(info==null)return null;
+
+        ShopDetailedInfo detailedinfo = new ShopDetailedInfo();
+
+        detailedinfo.setShopId(info.getShop().getShopId());
+        detailedinfo.setShopName(info.getShopName());
+        detailedinfo.setShopType(info.getShopType());
+        detailedinfo.setShopIntro(info.getShopIntro());
+        detailedinfo.setShopAddress(info.getShopAddress());
+        detailedinfo.setShopBusinessHours(info.getShopBusinessHours());
+        detailedinfo.setShopLohasInfo(info.getShopLohasInfo());
+        detailedinfo.setShopLongitude(info.getShopLongitude());
+        detailedinfo.setShopLatitude(info.getShopLatitude());
+        detailedinfo.setAvatar(info.getAvatar());
+        detailedinfo.setHeadPicture(info.getHeadPicture());
+
+        return detailedinfo;
+
+    }
+
 
 
 }

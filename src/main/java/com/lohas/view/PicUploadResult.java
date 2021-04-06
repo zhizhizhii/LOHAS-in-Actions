@@ -2,6 +2,7 @@ package com.lohas.view;
 
 public class PicUploadResult {
 
+
     private String pic_url;
 
     private String status;

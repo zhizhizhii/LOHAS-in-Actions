@@ -1,8 +1,9 @@
 package com.lohas.request;
 
-import com.lohas.model.Shop;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 public class CreateAnnouncementRequest {
 
     @ApiModelProperty(value = "公告标题")
@@ -11,19 +12,4 @@ public class CreateAnnouncementRequest {
     @ApiModelProperty(value = "公告内容")
     private String content;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

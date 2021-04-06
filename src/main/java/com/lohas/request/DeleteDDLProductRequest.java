@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class DeleteDDLProductRequest {
 
     @ApiModelProperty(value = "商品id")
-    @JsonProperty("productid")
+    @JsonProperty("product_id")
     private Integer productId;
 }

@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeleteForsaleProductRequest {
+
     @ApiModelProperty(value = "商品id")
-    @JsonProperty("productid")
+    @JsonProperty("product_id")
     private Integer productId;
+
 }

@@ -1,5 +1,6 @@
 package com.lohas.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.common.PaginationReceive;
 import com.lohas.model.ForsaleProduct;
 import com.lohas.model.ShopAnnouncement;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ShopBriefInfoPage extends PaginationReceive {
 
     @ApiModelProperty(value = "商品信息列表")
+    @JsonProperty("shop_briefinfo_items")
     private List<ShopBriefInfoItem> shopBriefInfoItems;
 
     public ShopBriefInfoPage(Page<ShopInfo> shopBriefInfoPage){

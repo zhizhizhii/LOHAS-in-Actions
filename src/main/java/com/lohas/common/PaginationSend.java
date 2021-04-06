@@ -7,11 +7,11 @@ public class PaginationSend {
     //send是指从前端发送过来的数据，receive是指前端收到的数据
 
     @ApiModelProperty(value = "当前页号")
-    @JsonProperty("pagenum")
+    @JsonProperty("page_num")
     private Integer pageNum;
 
     @ApiModelProperty(value = "页面大小")
-    @JsonProperty("pagesize")
+    @JsonProperty("page_size")
     private Integer pageSize;
 
     public Integer getPageNum() {

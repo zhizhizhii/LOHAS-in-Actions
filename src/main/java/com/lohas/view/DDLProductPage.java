@@ -1,5 +1,6 @@
 package com.lohas.view;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.common.PaginationReceive;
 import com.lohas.model.DDLProduct;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,7 +11,9 @@ import java.util.stream.Collectors;
 
 @Data
 public class DDLProductPage extends PaginationReceive {
+
     @ApiModelProperty(value = "临期商品列表")
+    @JsonProperty("ddlproduct_item_list")
     private List<DDLProductItem> ddlProductItems;
 
     public DDLProductPage(Page<DDLProduct> ddlProductPage){

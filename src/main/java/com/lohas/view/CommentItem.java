@@ -12,11 +12,11 @@ import java.util.Date;
 public class CommentItem {
 
     @ApiModelProperty(value = "评论id")
-    @JsonProperty("commentid")
+    @JsonProperty("comment_id")
     private Integer commentId;
 
     @ApiModelProperty(value = "评论用户id")
-    @JsonProperty("userid")
+    @JsonProperty("user_id")
     private Integer userId;
 
     @ApiModelProperty(value = "评论用户名")
@@ -30,6 +30,6 @@ public class CommentItem {
     private String content;
 
     @ApiModelProperty(value = "发布时间")
-    @JsonProperty("commenttime")
+    @JsonProperty("comment_time")
     private Date commentTime;
 }

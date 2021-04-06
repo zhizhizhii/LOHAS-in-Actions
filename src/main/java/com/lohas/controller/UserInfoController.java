@@ -20,7 +20,7 @@ public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
 
-    @ApiOperation(value="获取用户个人信息",notes="注意！请在header中携带token")
+    @ApiOperation(value="获取用户个人信息（仅用户权限）",notes="注意！请在header中携带token")
     @GetMapping(path="/get")
     @ResponseBody
     public UserInfoView getUserInfo(HttpServletRequest request){
@@ -28,7 +28,7 @@ public class UserInfoController {
     }
 
 
-    @ApiOperation(value="修改用户个人信息",notes="注意！请在header中携带token")
+    @ApiOperation(value="修改用户个人信息（仅用户权限）",notes="注意！请在header中携带token")
     @PostMapping(path="/update")
     @ResponseBody
     public Status updateUserInfo(@RequestBody UserInfoRequest userInfoRequest, HttpServletRequest request){

@@ -11,38 +11,41 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class DDLProductItem {
+
     @ApiModelProperty(value = "商品id")
-    @JsonProperty("productid")
+    @JsonProperty("product_id")
     private Integer productId;
 
     @ApiModelProperty(value = "商品名")
-    @JsonProperty("productname")
+    @JsonProperty("product_name")
     private String productName;
 
     @ApiModelProperty(value = "商品介绍")
-    @JsonProperty("productintro")
+    @JsonProperty("product_intro")
     private String productIntro;
 
-    @JsonProperty("origincost")
+    @JsonProperty("origin_cost")
     private Double originCost;
 
-    @JsonProperty("currentcost")
+    @JsonProperty("current_cost")
     private Double currentCost;
 
     @ApiModelProperty(value = "生产日期")
-    @JsonProperty("productiondate")
+    @JsonProperty("production_date")
     private Date productionDate;
 
     @ApiModelProperty(value = "过期日期")
-    @JsonProperty("expirtydate")
+    @JsonProperty("expiry_date")
     private Date expiryDate;
 
     @ApiModelProperty(value = "上传日期")
-    @JsonProperty("productpubdate")
+    @JsonProperty("product_pubdate")
     private Date productPubdate;
 
     private Double discount;
 
+    @ApiModelProperty(value = "商品图片")
+    @JsonProperty("product_pic")
     private String productPic;
 
     public DDLProductItem(DDLProduct ddlProduct){

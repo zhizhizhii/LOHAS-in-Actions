@@ -3,7 +3,6 @@ package com.lohas.view;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.common.PaginationReceive;
 import com.lohas.dao.inter.CommentforUserInterface;
-import com.lohas.dao.inter.UserCommentInterface;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.domain.Page;
@@ -13,8 +12,9 @@ import java.util.List;
 
 @Data
 public class CommentforUserPage extends PaginationReceive {
+
     @ApiModelProperty(value = "评论列表")
-    @JsonProperty("commentitemlist")
+    @JsonProperty("comment_item_list")
     private List<CommentforUserItem> commentItemList;
 
 

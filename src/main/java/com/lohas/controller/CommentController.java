@@ -27,7 +27,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @ApiOperation(value = "用户发布评论")
+    @ApiOperation(value = "用户发布评论（仅用户权限）")
     @PostMapping(path="/create")
     @ResponseBody
     public Status createComment(@RequestBody CreateCommentRequest commentRequest, HttpServletRequest request){
@@ -41,14 +41,14 @@ public class CommentController {
 //        return commentService.updateComment(updateCommentRequest, request);
 //    }
 
-    @ApiOperation(value = "用户删除评论")
+    @ApiOperation(value = "用户删除评论（仅用户权限）")
     @PostMapping(path="/delete")
     @ResponseBody
     public Status deleteComment(@RequestBody DeleteCommentRequest deleteCommentRequest, HttpServletRequest request){
         return commentService.deleteComment(deleteCommentRequest, request);
     }
 
-    @ApiOperation(value = "用户查看自己的评论")
+    @ApiOperation(value = "用户查看自己的评论（仅用户权限）")
     @PostMapping(path="/querybyuser")
     @ResponseBody
     public CommentforUserPage getCommentOfUser(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
@@ -56,14 +56,14 @@ public class CommentController {
     }
 
 
-    @ApiOperation(value = "查询某一店家的评论")
+    @ApiOperation(value = "查询某一店家的评论（仅用户权限）")
     @PostMapping(path="/querybyshop")
     @ResponseBody
     public CommentPage getCommentOfOneShop(@RequestBody QueryByShopRequest queryByShopRequest, HttpServletRequest request){
         return commentService.queryCommentByShop(queryByShopRequest, request);
     }
 
-    @ApiOperation(value = "店家查询自己的评论")
+    @ApiOperation(value = "店家查询自己的评论（仅商家权限）")
     @PostMapping(path="/getmine")
     @ResponseBody
     public CommentPage getCommentOfMine(@RequestBody PaginationSend paginationSend, HttpServletRequest request){

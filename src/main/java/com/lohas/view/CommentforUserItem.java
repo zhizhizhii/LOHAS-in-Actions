@@ -8,16 +8,17 @@ import java.util.Date;
 
 @Data
 public class CommentforUserItem {
+
     @ApiModelProperty(value = "评论id")
-    @JsonProperty("commentid")
+    @JsonProperty("comment_id")
     private Integer commentId;
 
     @ApiModelProperty(value = "商店id")
-    @JsonProperty("shopid")
+    @JsonProperty("shop_id")
     private Integer shopId;
 
     @ApiModelProperty(value = "商店名称")
-    @JsonProperty("shopname")
+    @JsonProperty("shop_name")
     private String shopName;
 
     @ApiModelProperty(value = "商户头像")
@@ -27,6 +28,6 @@ public class CommentforUserItem {
     private String content;
 
     @ApiModelProperty(value = "发布时间")
-    @JsonProperty("commenttime")
+    @JsonProperty("comment_time")
     private Date commentTime;
 }

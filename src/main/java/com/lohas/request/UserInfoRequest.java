@@ -13,7 +13,7 @@ public class UserInfoRequest {
     private String sex;
 
     @ApiModelProperty("想要修改的手机号")
-    @JsonProperty("phonenumber")
+    @JsonProperty("phone_number")
     private String phoneNumber;
 
     @ApiModelProperty("想要修改的头像存储地址")

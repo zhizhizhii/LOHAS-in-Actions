@@ -11,29 +11,33 @@ import java.util.Date;
 @NoArgsConstructor
 public class ForsaleProductItem {
     @ApiModelProperty(value = "商品id")
-    @JsonProperty("productid")
+    @JsonProperty("product_id")
     private Integer productId;
 
     @ApiModelProperty(value = "商品名")
-    @JsonProperty("productname")
+    @JsonProperty("product_name")
     private String productName;
 
     @ApiModelProperty(value = "商品介绍")
-    @JsonProperty("productintro")
+    @JsonProperty("product_intro")
     private String productIntro;
 
-    @JsonProperty("origincost")
+    @ApiModelProperty(value = "商品原价")
+    @JsonProperty("origin_cost")
     private Double originCost;
 
-    @JsonProperty("currentcost")
+    @ApiModelProperty(value = "商品现价")
+    @JsonProperty("current_cost")
     private Double currentCost;
 
     @ApiModelProperty(value = "上传日期")
-    @JsonProperty("productpubdate")
+    @JsonProperty("product_pubdate")
     private Date productPubdate;
 
     private Double discount;
 
+    @ApiModelProperty(value = "商品图片")
+    @JsonProperty("product_pic")
     private String productPic;
 
     public ForsaleProductItem(ForsaleProduct forsaleProduct){

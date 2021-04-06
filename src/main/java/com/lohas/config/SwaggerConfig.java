@@ -26,7 +26,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo(){
         return new ApiInfo("\"LOHAS in Actions\" Api Documentation",
                 "Api Documentation",
-                "1.0",
+                "v1.1",
                 "",
                 new Contact("", "", ""),
                 "",

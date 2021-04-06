@@ -22,33 +22,34 @@ public class ShopInfoController {
     @Autowired
     ShopInfoService shopInfoService;
 
-    @ApiOperation(value="用户获取商店简略信息（用于展示）")
+    @ApiOperation(value="用户获取商店简略信息（仅用户权限）")
     @PostMapping(path="/getbrief")
     @ResponseBody
     public ShopBriefInfoPage getShopBriefInfo(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
         return shopInfoService.getShopBriefInfo(paginationSend, request);
     }
 
-    @ApiOperation(value="用户获取商店详细信息")
+    @ApiOperation(value="用户获取商店详细信息（仅用户权限）")
     @GetMapping(path="/getdetailed")
     @ResponseBody
-    public ShopDetailedInfo getShopBriefInfo(@RequestParam Integer shopId, HttpServletRequest request){
+    public ShopDetailedInfo getShopDetailedInfo(@RequestParam Integer shopId, HttpServletRequest request){
         return shopInfoService.getShopDetailedInfo(shopId);
     }
 
-    @ApiOperation(value="商家修改商店信息")
-    @GetMapping(path="/update")
+    @ApiOperation(value="商家修改商店信息（仅商店权限）")
+    @PostMapping(path="/update")
     @ResponseBody
     public Status updateShopInfo(@RequestParam UpdateShopInfoRequest updateShopInfoRequest, HttpServletRequest request){
         return shopInfoService.updateShopInfo(updateShopInfoRequest,request);
     }
 
 
-
-
-
-
-
+    @ApiOperation(value="商家获取个人商店信息（仅商店权限）")
+    @GetMapping(path="/getmine")
+    @ResponseBody
+    public ShopDetailedInfo getShopInfoMine(HttpServletRequest request){
+        return shopInfoService.getShopInfoMine(request);
+    }
 
 
 

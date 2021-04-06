@@ -20,21 +20,21 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
-    @ApiOperation(value="商家注册",notes="保留接口，可用" )
+    @ApiOperation(value="商家注册（仅自己使用）",notes="保留接口，可用" )
     @PostMapping(path="/register")
     @ResponseBody
     public Status register(@RequestBody ShopRequest shopRequest, HttpServletResponse response){
         return shopService.register(shopRequest);
     }
 
-    @ApiOperation(value="商家登录",notes="商家登录接口，token会放在header中返回" )
+    @ApiOperation(value="商家登录（不限权限）",notes="商家登录接口，token会放在header中返回" )
     @PostMapping(path="/login")
     @ResponseBody
     public Status login(@RequestBody ShopRequest shopRequest, HttpServletResponse response){
         return shopService.login(shopRequest,response);
     }
 
-    @ApiOperation(value="商家修改密码",notes="用于商家修改密码" )
+    @ApiOperation(value="商家修改密码（仅商户权限）",notes="用于商家修改密码" )
     @PostMapping(path="/changepwd")
     @ResponseBody
     public Status changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request){

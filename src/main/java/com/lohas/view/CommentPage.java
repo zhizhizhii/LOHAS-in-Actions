@@ -6,23 +6,18 @@ import com.lohas.dao.inter.UserCommentInterface;
 import com.lohas.model.ShopInfo;
 import com.lohas.model.UserComment;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class CommentPage extends PaginationReceive {
+
     @ApiModelProperty(value = "评论列表")
-    @JsonProperty("commentitemlist")
+    @JsonProperty("comment_item_list")
     private List<CommentItem> commentItemList;
-
-    public List<CommentItem> getCommentItemList() {
-        return commentItemList;
-    }
-
-    public void setCommentItemList(List<CommentItem> commentItemList) {
-        this.commentItemList = commentItemList;
-    }
 
     public CommentPage(Page<UserCommentInterface> userCommentPage){
         setPageNum(userCommentPage.getNumber() + 1);

@@ -21,21 +21,21 @@ public class CollectController {
     @Autowired
     CollectionService collectionService;
 
-    @ApiOperation(value = "添加收藏")
+    @ApiOperation(value = "添加收藏（仅用户权限）")
     @PostMapping(path="/add")
     @ResponseBody
     public Status createCollection(@RequestBody CreateCollectionRequest createCollectionRequest, HttpServletRequest request){
         return collectionService.createCollection(createCollectionRequest, request);
     }
 
-    @ApiOperation(value = "删除收藏")
+    @ApiOperation(value = "删除收藏（仅用户权限）")
     @PostMapping(path="/delete")
     @ResponseBody
     public Status deleteCollection(@RequestBody CreateCollectionRequest createCollectionRequest, HttpServletRequest request){
         return collectionService.deleteCollection(createCollectionRequest, request);
     }
 
-    @ApiOperation(value = "获取收藏信息")
+    @ApiOperation(value = "获取收藏信息（仅用户权限）")
     @PostMapping(path="/get")
     @ResponseBody
     public ShopBriefInfoPage getCollection(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
