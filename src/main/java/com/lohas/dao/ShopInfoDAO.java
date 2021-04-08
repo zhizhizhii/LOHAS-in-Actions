@@ -16,5 +16,6 @@ public interface ShopInfoDAO extends CrudRepository<ShopInfo,Integer> {
             ,nativeQuery = true)
     Page<ShopInfo> findCollectInfo(Integer userId,Pageable pageable);
 
+    Page<ShopInfo> findAllByShopType(String shopType, Pageable pageable);
 
 }

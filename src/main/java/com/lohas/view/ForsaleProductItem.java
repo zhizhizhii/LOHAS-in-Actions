@@ -1,10 +1,12 @@
 package com.lohas.view;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.model.ForsaleProduct;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
@@ -32,6 +34,8 @@ public class ForsaleProductItem {
 
     @ApiModelProperty(value = "上传日期")
     @JsonProperty("product_pubdate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date productPubdate;
 
     private Double discount;

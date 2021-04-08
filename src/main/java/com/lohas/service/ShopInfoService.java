@@ -7,6 +7,7 @@ import com.lohas.model.Shop;
 import com.lohas.model.ShopInfo;
 import com.lohas.model.User;
 import com.lohas.model.UserInfo;
+import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
 import com.lohas.utils.JWTUtils;
 import com.lohas.view.DDLProductPage;
@@ -41,6 +42,21 @@ public class ShopInfoService {
         return new ShopBriefInfoPage(page);
 
     }
+
+    public ShopBriefInfoPage getShopBriefInfoByType(QueryShopInfoByTypeRequest queryShopInfoByTypeRequest){
+
+        Page<ShopInfo> page =  shopInfoDAO.findAllByShopType(
+                queryShopInfoByTypeRequest.getShopType(),
+                PageRequest.of(
+                        queryShopInfoByTypeRequest.getPageNum() - 1,
+                        queryShopInfoByTypeRequest.getPageSize()
+                )
+        );
+
+        return new ShopBriefInfoPage(page);
+
+    }
+
 
     public ShopDetailedInfo getShopDetailedInfo(Integer ShopId){
         ShopInfo info = shopInfoDAO.findShopInfoByShop(shopDAO.findShopByShopId(ShopId));

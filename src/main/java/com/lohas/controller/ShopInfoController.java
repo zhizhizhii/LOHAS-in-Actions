@@ -1,6 +1,8 @@
 package com.lohas.controller;
 
 import com.lohas.common.PaginationSend;
+import com.lohas.request.QueryByShopRequest;
+import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
 import com.lohas.service.ShopInfoService;
 import com.lohas.view.ShopBriefInfoPage;
@@ -52,6 +54,12 @@ public class ShopInfoController {
     }
 
 
+    @ApiOperation(value="用户获取商店简略信息（仅用户权限）")
+    @PostMapping(path="/getbriefbytype")
+    @ResponseBody
+    public ShopBriefInfoPage getBriefbyType(@RequestBody QueryShopInfoByTypeRequest queryShopInfoByTypeRequest){
+        return shopInfoService.getShopBriefInfoByType(queryShopInfoByTypeRequest);
+    }
 
 
 }

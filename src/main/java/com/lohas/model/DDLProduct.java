@@ -1,7 +1,9 @@
 package com.lohas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.Formula;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,7 +27,8 @@ public class DDLProduct {
     @Column(name = "product_intro")
     private String productIntro;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     @Column(name = "product_pubdate")
     private Date productPubdate;
 
@@ -35,15 +38,17 @@ public class DDLProduct {
     @Column(name = "current_cost")
     private Double currentCost;
 
-    @Formula("Cast((select origin_cost from forsale_product f where f.product_id = product_id)" +
-            "/(select current_cost from forsale_product f where f.product_id = product_id) As Dec(4,1))")
+    @Formula("Cast((select current_cost from ddl_product d where d.product_id = product_id)" +
+            "/(select origin_cost from ddl_product d where d.product_id = product_id) As Dec(4,2))")
     private Double discount;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     @Column(name = "production_date")
     private Date productionDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     @Column(name = "expiry_date")
     private Date expiryDate;
 
