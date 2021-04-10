@@ -71,9 +71,9 @@ public class CollectionService {
     }
 
     public ShopBriefInfoPage getCollection(PaginationSend paginationSend, HttpServletRequest request){
-        //Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
+        Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
 
-        Page<ShopInfo> page =  shopInfoDAO.findCollectInfo(2,
+        Page<ShopInfo> page =  shopInfoDAO.findCollectInfo(userId,
                 PageRequest.of(
                         paginationSend.getPageNum() - 1,
                         paginationSend.getPageSize()

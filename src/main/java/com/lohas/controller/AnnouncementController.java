@@ -57,7 +57,7 @@ public class AnnouncementController {
     @ApiOperation(value = "商家查询自己的公告（仅商家权限）")
     @PostMapping(path="/getmine")
     @ResponseBody
-    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+    public AnnouncementPage getAnnouncementOfMine(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
         return announcementService.getAnnouncementOfMine(paginationSend, request);
     }
 }
