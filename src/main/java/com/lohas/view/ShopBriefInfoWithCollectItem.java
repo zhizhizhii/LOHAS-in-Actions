@@ -34,5 +34,6 @@ public class ShopBriefInfoWithCollectItem {
     private String avatar;
 
     @ApiModelProperty(value = "用户是否收藏了本家店铺")
+    @JsonProperty("is_collected")
     private Integer isCollected;
 }
