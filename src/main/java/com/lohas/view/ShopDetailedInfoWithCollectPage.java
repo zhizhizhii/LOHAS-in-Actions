@@ -12,20 +12,20 @@ import java.util.List;
 
 
 @Data
-public class ShopBriefInfoWithCollectPage extends PaginationReceive {
+public class ShopDetailedInfoWithCollectPage extends PaginationReceive {
 
     @ApiModelProperty(value = "带是否收藏的商品信息列表")
     @JsonProperty("shop_briefinfo_items")
-    private List<ShopBriefInfoWithCollectItem> shopBriefInfoWithCollectItems;
+    private List<ShopDetailedInfoWithCollectItem> shopDetailedInfoWithCollectItems;
 
-    public ShopBriefInfoWithCollectPage(Page<ShopInfo> s, List<Integer> collect){
+    public ShopDetailedInfoWithCollectPage(Page<ShopInfo> s, List<Integer> collect){
         setPageNum(s.getNumber() + 1);
         setTotalPage(s.getTotalPages());
         List<ShopInfo> shopInfos = s.getContent();
-        List<ShopBriefInfoWithCollectItem> list = new ArrayList<>();
+        List<ShopDetailedInfoWithCollectItem> list = new ArrayList<>();
         Integer size = shopInfos.size();
         for(int i = 0 ; i < size; i++){
-            ShopBriefInfoWithCollectItem collectItem = new ShopBriefInfoWithCollectItem();
+            ShopDetailedInfoWithCollectItem collectItem = new ShopDetailedInfoWithCollectItem();
             ShopInfo si = shopInfos.get(i);
             collectItem.setShopId(si.getShop().getShopId());
             collectItem.setShopType(si.getShopType());
@@ -34,9 +34,13 @@ public class ShopBriefInfoWithCollectPage extends PaginationReceive {
             collectItem.setAvatar(si.getAvatar());
             collectItem.setShopLongitude(si.getShopLongitude());
             collectItem.setShopLatitude(si.getShopLatitude());
+            collectItem.setHeadPicture(si.getHeadPicture());
+            collectItem.setShopIntro(si.getShopIntro());
+            collectItem.setShopBusinessHours(si.getShopBusinessHours());
+            collectItem.setShopAddress(si.getShopAddress());
             collectItem.setIsCollected(collect.get(i));
             list.add(collectItem);
         }
-        setShopBriefInfoWithCollectItems(list);
+        setShopDetailedInfoWithCollectItems(list);
     }
 }

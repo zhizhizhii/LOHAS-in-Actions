@@ -47,7 +47,7 @@ public class AnnouncementController {
         return announcementService.deleteAnnouncement(deleteAnnouncementRequest, request);
     }
 
-    @ApiOperation(value = "查询店家的公告（仅用户权限）")
+    @ApiOperation(value = "查询店家的公告")
     @PostMapping(path="/query")
     @ResponseBody
     public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryByShopRequest queryByShopRequest, HttpServletRequest request){

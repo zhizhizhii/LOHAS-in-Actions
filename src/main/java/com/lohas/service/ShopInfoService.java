@@ -48,7 +48,7 @@ public class ShopInfoService {
     }
 
 
-    public ShopBriefInfoWithCollectPage getShopBriefInfoWithCollect(PaginationSend paginationSend, HttpServletRequest request){
+    public ShopDetailedInfoWithCollectPage getShopDetailedInfoWithCollect(PaginationSend paginationSend, HttpServletRequest request){
 
         Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
         Page<ShopInfo> page =  shopInfoDAO.findAll(
@@ -70,7 +70,7 @@ public class ShopInfoService {
                 result.add(1);
             }
         }
-        return new ShopBriefInfoWithCollectPage(page,result);
+        return new ShopDetailedInfoWithCollectPage(page,result);
     }
 
 

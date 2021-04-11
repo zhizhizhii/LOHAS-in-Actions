@@ -1,12 +1,11 @@
 package com.lohas.controller;
 
 import com.lohas.common.PaginationSend;
-import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
 import com.lohas.service.ShopInfoService;
 import com.lohas.view.ShopBriefInfoPage;
-import com.lohas.view.ShopBriefInfoWithCollectPage;
+import com.lohas.view.ShopDetailedInfoWithCollectPage;
 import com.lohas.view.ShopDetailedInfo;
 import com.lohas.view.Status;
 import io.swagger.annotations.Api;
@@ -63,10 +62,10 @@ public class ShopInfoController {
     }
 
     @ApiOperation(value="用户获取商店简略信息+用户是否收藏（需要token）")
-    @PostMapping(path="/getbriefwithcollect")
+    @PostMapping(path="/getdetailedwithcollect")
     @ResponseBody
-    public ShopBriefInfoWithCollectPage getShopBriefInfoWithCollect(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
-        return shopInfoService.getShopBriefInfoWithCollect(paginationSend, request);
+    public ShopDetailedInfoWithCollectPage getShopDetailedInfoWithCollect(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+        return shopInfoService.getShopDetailedInfoWithCollect(paginationSend, request);
     }
 
 
