@@ -76,7 +76,7 @@ public class DDLProductService {
         return status;
     }
 
-    public Status deleteDDLProduct(DeleteDDLProductRequest deleteDDLProductRequest, HttpServletRequest request){
+    public Status deleteDDLProduct(DeleteProductRequest deleteDDLProductRequest, HttpServletRequest request){
         Status status =new Status();
         Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
         try{

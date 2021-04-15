@@ -2,7 +2,7 @@ package com.lohas.controller;
 
 import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateForsaleProductRequest;
-import com.lohas.request.DeleteForsaleProductRequest;
+import com.lohas.request.DeleteProductRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateForsaleProductRequest;
 import com.lohas.service.ForsaleProductService;
@@ -43,7 +43,7 @@ public class ForsaleProductController {
     @ApiOperation(value = "删除折扣商品（仅商户权限）")
     @PostMapping(path="/delete")
     @ResponseBody
-    public Status deleteForsaleProduct(@RequestBody DeleteForsaleProductRequest deleteForsaleProductRequest, HttpServletRequest request){
+    public Status deleteForsaleProduct(@RequestBody DeleteProductRequest deleteForsaleProductRequest, HttpServletRequest request){
         return forsaleProductService.deleteForsaleProduct(deleteForsaleProductRequest, request);
     }
 

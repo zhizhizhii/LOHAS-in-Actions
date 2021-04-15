@@ -72,7 +72,7 @@ public class CollectionService {
 
     public ShopBriefInfoPage getCollection(PaginationSend paginationSend, HttpServletRequest request){
         //Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
-
+        //TODO: 把2改为userId
         Page<ShopInfo> page =  shopInfoDAO.findCollectInfo(2,
                 PageRequest.of(
                         paginationSend.getPageNum() - 1,

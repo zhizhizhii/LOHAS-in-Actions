@@ -2,7 +2,7 @@ package com.lohas.controller;
 
 import com.lohas.common.PaginationSend;
 import com.lohas.request.CreateDDLProductRequest;
-import com.lohas.request.DeleteDDLProductRequest;
+import com.lohas.request.DeleteProductRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateDDLProductRequest;
 import com.lohas.service.DDLProductService;
@@ -44,7 +44,7 @@ public class DDLProductController {
     @ApiOperation(value = "删除临期商品（仅商店权限）")
     @PostMapping(path="/delete")
     @ResponseBody
-    public Status deleteDDLProduct(@RequestBody DeleteDDLProductRequest deleteDDLProductRequest, HttpServletRequest request){
+    public Status deleteDDLProduct(@RequestBody DeleteProductRequest deleteDDLProductRequest, HttpServletRequest request){
         return ddlProductService.deleteDDLProduct(deleteDDLProductRequest, request);
     }
 

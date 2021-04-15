@@ -6,7 +6,7 @@ import com.lohas.dao.ShopDAO;
 import com.lohas.model.ForsaleProduct;
 import com.lohas.model.Shop;
 import com.lohas.request.CreateForsaleProductRequest;
-import com.lohas.request.DeleteForsaleProductRequest;
+import com.lohas.request.DeleteProductRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateForsaleProductRequest;
 import com.lohas.utils.JWTUtils;
@@ -74,7 +74,7 @@ public class ForsaleProductService {
         return status;
     }
 
-    public Status deleteForsaleProduct(DeleteForsaleProductRequest deleteForsaleProductRequest, HttpServletRequest request){
+    public Status deleteForsaleProduct(DeleteProductRequest deleteForsaleProductRequest, HttpServletRequest request){
         Status status =new Status();
         Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
         try{
