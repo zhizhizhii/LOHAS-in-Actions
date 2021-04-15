@@ -9,4 +9,7 @@ public interface MysteryBoxOrderOfUserInterface {
     public String getAvatar();
     public String getIs_Tsken();
     public Date getOrder_Time();
+    Integer getProduct_Id();
+    String getProduct_Pic();
+    String getProduct_Name();
 }

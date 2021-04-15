@@ -21,7 +21,7 @@ public class MysteryBoxOrder {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="mystery_box_id")
+    @JoinColumn(name="product_id")
     private MysteryBox mysteryBox;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")

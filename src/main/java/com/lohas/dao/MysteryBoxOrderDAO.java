@@ -11,8 +11,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface MysteryBoxOrderDAO extends CrudRepository<MysteryBoxOrder,Integer> {
     MysteryBoxOrder findByOrderId(Integer orderId);
 
-    @Query(value="select user_id,order_id,user_name,avatar,order_time,is_taken " +
-            "from user_info natural join mystery_box_order natural join mystery_box" +
+    @Query(value="select user_id,order_id,user_name,avatar,order_time,is_taken,product_id, product_pic, product_name " +
+            "from user_info natural join mystery_box_order natural join mystery_box " +
             "where shop_id = ?",
             countQuery = "select\n" +
                     "        count(*) \n" +
@@ -22,8 +22,8 @@ public interface MysteryBoxOrderDAO extends CrudRepository<MysteryBoxOrder,Integ
             ,nativeQuery = true)
     Page<MysteryBoxOrderOfShopInterface> findMysteryBoxOrderByShop(Integer shopId, Pageable pageable);
 
-    @Query(value="select shop_id,order_id,shop_name,avatar,is_taken,order_time " +
-            "from shop_info natural join mystery_box_order natural join mystery_box" +
+    @Query(value="select shop_id,order_id,shop_name,avatar,is_taken,order_time,product_id, product_pic, product_name " +
+            "from shop_info natural join mystery_box_order natural join mystery_box " +
             "where user_id = ?",
             countQuery = "select\n" +
                     "        count(*) \n" +
