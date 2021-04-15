@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Table(name = "mystery_box")
 public class MysteryBox {
     @Id
     @Column(name = "product_id")
