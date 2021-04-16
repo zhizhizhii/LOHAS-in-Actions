@@ -41,7 +41,7 @@ public class ShopInfoController {
     @ApiOperation(value="商家修改商店信息")
     @PostMapping(path="/update")
     @ResponseBody
-    public Status updateShopInfo(@RequestParam UpdateShopInfoRequest updateShopInfoRequest, HttpServletRequest request){
+    public Status updateShopInfo(@RequestBody UpdateShopInfoRequest updateShopInfoRequest, HttpServletRequest request){
         return shopInfoService.updateShopInfo(updateShopInfoRequest,request);
     }
 
