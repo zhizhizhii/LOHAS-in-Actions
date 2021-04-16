@@ -32,4 +32,11 @@ public interface MysteryBoxOrderDAO extends CrudRepository<MysteryBoxOrder,Integ
                     "        user_id = ?"
             ,nativeQuery = true)
     Page<MysteryBoxOrderOfUserInterface> findMysteryBoxOrderByUser(Integer userId, Pageable pageable);
+
+    @Query(value="select count(*) " +
+            "from mystery_box_order " +
+            "where DateDiff(dd,order_time,getdate())=0 " +
+            "and user_id = ? "
+            ,nativeQuery = true)
+    Integer findOrderCountByUserAndDate(Integer userId);
 }

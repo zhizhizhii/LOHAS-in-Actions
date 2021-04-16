@@ -7,7 +7,7 @@ public interface MysteryBoxOrderOfUserInterface {
     public Integer getShop_Id();
     public String getShop_Name();
     public String getAvatar();
-    public String getIs_Tsken();
+    public Boolean getIs_Tsken();
     public Date getOrder_Time();
     Integer getProduct_Id();
     String getProduct_Pic();
