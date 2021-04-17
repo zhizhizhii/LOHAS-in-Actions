@@ -61,7 +61,7 @@ public class MysteryBoxController {
     }
 
     @ApiOperation(value = "根据ID查询盲盒")
-    @PostMapping(path="/querybyId")
+    @GetMapping(path="/querybyId")
     @ResponseBody
     public MysteryBoxItem getMysteryBoxById(@RequestParam Integer product_id){
         return mysteryBoxService.getMysteryBoxById(product_id);

@@ -62,7 +62,7 @@ public class ForsaleProductController {
     }
 
     @ApiOperation(value = "根据ID查询折扣商品")
-    @PostMapping(path="/querybyId")
+    @GetMapping(path="/querybyId")
     @ResponseBody
     public ForsaleProductItem getForsaleProductById(@RequestParam Integer product_id){
         return forsaleProductService.getForsaleProductById(product_id);

@@ -58,7 +58,7 @@ public class DDLProductController {
     }
 
     @ApiOperation(value = "根据ID查询临期商品")
-    @PostMapping(path="/querybyId")
+    @GetMapping(path="/querybyId")
     @ResponseBody
     public DDLProductItem getDDLProductById(@RequestParam Integer product_id){
         return ddlProductService.getDDLProductById(product_id);

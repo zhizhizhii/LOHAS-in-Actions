@@ -60,7 +60,7 @@ public class AnnouncementController {
     }
 
     @ApiOperation(value = "根据ID查询公告")
-    @PostMapping(path="/querybyId")
+    @GetMapping(path="/querybyId")
     @ResponseBody
     public AnnouncementItem getAnnouncementById(@RequestParam Integer announcement_id){
         return announcementService.getAnnouncementById(announcement_id);
