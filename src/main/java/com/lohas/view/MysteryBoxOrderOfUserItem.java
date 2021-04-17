@@ -45,7 +45,7 @@ public class MysteryBoxOrderOfUserItem {
 
     public MysteryBoxOrderOfUserItem(MysteryBoxOrderOfUserInterface mysteryBoxOrderOfUserInterface){
         setAvatar(mysteryBoxOrderOfUserInterface.getAvatar());
-        setIsTaken(mysteryBoxOrderOfUserInterface.getIs_Tsken());
+        setIsTaken(mysteryBoxOrderOfUserInterface.getIs_Taken());
         setOrderId(mysteryBoxOrderOfUserInterface.getOrder_Id());
         setOrderTime(mysteryBoxOrderOfUserInterface.getOrder_Time());
         setProductId(mysteryBoxOrderOfUserInterface.getProduct_Id());

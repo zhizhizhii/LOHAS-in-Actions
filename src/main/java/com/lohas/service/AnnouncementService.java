@@ -11,6 +11,7 @@ import com.lohas.request.DeleteAnnouncementRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
 import com.lohas.utils.JWTUtils;
+import com.lohas.view.AnnouncementItem;
 import com.lohas.view.AnnouncementPage;
 import com.lohas.view.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +101,15 @@ public class AnnouncementService {
         Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
         return new AnnouncementPage(shopAnnouncementDAO.findAllByShop(shopDAO.findShopByShopId(shopId),
                 PageRequest.of(paginationSend.getPageNum() - 1, paginationSend.getPageSize())));
+    }
+
+    public AnnouncementItem getAnnouncementById(Integer Id){
+        ShopAnnouncement a = shopAnnouncementDAO.findShopAnnouncementByAnnouncementId(Id);
+        AnnouncementItem item = new AnnouncementItem();
+        item.setAnnouncementId(a.getAnnouncementId());
+        item.setContent(a.getContent());
+        item.setPublishTime(a.getPublishTime());
+        item.setTitle(a.getTitle());
+        return item;
     }
 }

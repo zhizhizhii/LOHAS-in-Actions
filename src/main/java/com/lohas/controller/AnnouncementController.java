@@ -6,16 +6,14 @@ import com.lohas.request.DeleteAnnouncementRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateAnnouncementRequest;
 import com.lohas.service.AnnouncementService;
+import com.lohas.view.AnnouncementItem;
 import com.lohas.view.AnnouncementPage;
 import com.lohas.view.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -59,5 +57,12 @@ public class AnnouncementController {
     @ResponseBody
     public AnnouncementPage getAnnouncementOfOneShop(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
         return announcementService.getAnnouncementOfMine(paginationSend, request);
+    }
+
+    @ApiOperation(value = "根据ID查询公告")
+    @PostMapping(path="/querybyId")
+    @ResponseBody
+    public AnnouncementItem getAnnouncementById(@RequestParam Integer product_id){
+        return announcementService.getAnnouncementById(product_id);
     }
 }

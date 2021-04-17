@@ -62,7 +62,7 @@ public class PicUploadService {
         }
 
         picUploadResult.setStatus("done");
-        picUploadResult.setPic_url(aliyunOSSConfig.getUrlPrefix() + filePath);
+        picUploadResult.setPic_url("https://" + aliyunOSSConfig.getUrlPrefix() + filePath);
 
         return picUploadResult;
     }
