@@ -48,7 +48,7 @@ public class DDLProductController {
         return ddlProductService.deleteDDLProduct(deleteDDLProductRequest, request);
     }
 
-    @ApiOperation(value = "用户查询店家的临期商品（仅用户权限）")
+    @ApiOperation(value = "用户查询店家的临期商品")
     @PostMapping(path="/query")
     @ResponseBody
     public DDLProductPage getDDLProductOfOneShop(@RequestBody QueryByShopRequest queryDDLProductByShopRequest, HttpServletRequest request){

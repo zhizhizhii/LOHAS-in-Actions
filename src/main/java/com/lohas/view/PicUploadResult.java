@@ -1,25 +1,15 @@
 package com.lohas.view;
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+@Data
 public class PicUploadResult {
 
-
+    @ApiModelProperty("图片存放的url")
     private String pic_url;
 
+    @ApiModelProperty("存储成功与否")
     private String status;
 
-    public String getPic_url() {
-        return pic_url;
-    }
-
-    public void setPic_url(String pic_url) {
-        this.pic_url = pic_url;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

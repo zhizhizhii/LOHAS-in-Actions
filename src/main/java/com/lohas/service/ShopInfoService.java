@@ -3,23 +3,21 @@ package com.lohas.service;
 import com.lohas.common.PaginationSend;
 import com.lohas.dao.ShopDAO;
 import com.lohas.dao.ShopInfoDAO;
-import com.lohas.model.Shop;
-import com.lohas.model.ShopInfo;
-import com.lohas.model.User;
-import com.lohas.model.UserInfo;
+import com.lohas.dao.UserCollectDAO;
+import com.lohas.dao.UserDAO;
+import com.lohas.model.*;
 import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
 import com.lohas.utils.JWTUtils;
-import com.lohas.view.DDLProductPage;
-import com.lohas.view.ShopBriefInfoPage;
-import com.lohas.view.ShopDetailedInfo;
-import com.lohas.view.Status;
+import com.lohas.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ShopInfoService {
@@ -29,6 +27,12 @@ public class ShopInfoService {
 
     @Autowired
     ShopDAO shopDAO;
+
+    @Autowired
+    UserDAO userDAO;
+
+    @Autowired
+    UserCollectDAO userCollectDAO;
 
     public ShopBriefInfoPage getShopBriefInfo(PaginationSend paginationSend, HttpServletRequest request){
 
@@ -42,6 +46,36 @@ public class ShopInfoService {
         return new ShopBriefInfoPage(page);
 
     }
+
+
+    public ShopDetailedInfoWithCollectPage getShopDetailedInfoWithCollect(PaginationSend paginationSend, HttpServletRequest request){
+
+        Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
+        Page<ShopInfo> page =  shopInfoDAO.findAll(
+                PageRequest.of(
+                        paginationSend.getPageNum() - 1,
+                        paginationSend.getPageSize()
+                )
+        );
+
+        List<ShopInfo> list = page.getContent();
+        List<Integer> result = new ArrayList<Integer>();
+        for(ShopInfo item : list){
+            UserCollect u = userCollectDAO.findByUserAndShop(userDAO.findUserByUserId(userId),
+                    item.getShop());
+            if(u==null){
+                result.add(0);
+            }
+            else{
+                result.add(1);
+            }
+        }
+        return new ShopDetailedInfoWithCollectPage(page,result);
+    }
+
+
+
+
 
     public ShopBriefInfoPage getShopBriefInfoByType(QueryShopInfoByTypeRequest queryShopInfoByTypeRequest){
 

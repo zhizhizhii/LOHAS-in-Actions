@@ -47,7 +47,7 @@ public class ForsaleProductController {
         return forsaleProductService.deleteForsaleProduct(deleteForsaleProductRequest, request);
     }
 
-    @ApiOperation(value = "查询店家的折扣商品（仅用户权限）")
+    @ApiOperation(value = "查询店家的折扣商品")
     @PostMapping(path="/query")
     @ResponseBody
     public ForsaleProductPage getForsaleProductOfOneShop(@RequestBody QueryByShopRequest queryForsaleProductByShopRequest, HttpServletRequest request){

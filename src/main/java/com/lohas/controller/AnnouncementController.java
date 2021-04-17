@@ -45,7 +45,7 @@ public class AnnouncementController {
         return announcementService.deleteAnnouncement(deleteAnnouncementRequest, request);
     }
 
-    @ApiOperation(value = "查询店家的公告（仅用户权限）")
+    @ApiOperation(value = "查询店家的公告")
     @PostMapping(path="/query")
     @ResponseBody
     public AnnouncementPage getAnnouncementOfOneShop(@RequestBody QueryByShopRequest queryByShopRequest, HttpServletRequest request){
@@ -55,7 +55,7 @@ public class AnnouncementController {
     @ApiOperation(value = "商家查询自己的公告（仅商家权限）")
     @PostMapping(path="/getmine")
     @ResponseBody
-    public AnnouncementPage getAnnouncementOfOneShop(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
+    public AnnouncementPage getAnnouncementOfMine(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
         return announcementService.getAnnouncementOfMine(paginationSend, request);
     }
 
