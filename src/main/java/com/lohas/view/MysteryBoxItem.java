@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lohas.model.MysteryBox;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
+@NoArgsConstructor
 public class MysteryBoxItem {
     @ApiModelProperty(value = "商品id")
     @JsonProperty("product_id")

@@ -3,6 +3,7 @@ package com.lohas.service;
 import com.lohas.common.PaginationSend;
 import com.lohas.dao.ForsaleProductDAO;
 import com.lohas.dao.ShopDAO;
+import com.lohas.model.DDLProduct;
 import com.lohas.model.ForsaleProduct;
 import com.lohas.model.Shop;
 import com.lohas.request.CreateForsaleProductRequest;
@@ -10,6 +11,8 @@ import com.lohas.request.DeleteProductRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateForsaleProductRequest;
 import com.lohas.utils.JWTUtils;
+import com.lohas.view.DDLProductItem;
+import com.lohas.view.ForsaleProductItem;
 import com.lohas.view.ForsaleProductPage;
 import com.lohas.view.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +106,20 @@ public class ForsaleProductService {
         Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
         return new ForsaleProductPage(forsaleProductDAO.findAllByShop(shopDAO.findShopByShopId(shopId),
                 PageRequest.of(paginationSend.getPageNum() - 1, paginationSend.getPageSize())));
+    }
+
+    public ForsaleProductItem getForsaleProductById(Integer Id){
+        ForsaleProduct prod = forsaleProductDAO.findByProductId(Id);
+        ForsaleProductItem item = new ForsaleProductItem();
+        item.setProductId(prod.getProductId());
+        item.setProductName(prod.getProductName());
+        item.setProductPic(prod.getProductPic());
+        item.setCurrentCost(prod.getCurrentCost());
+        item.setDiscount(prod.getDiscount());
+        item.setOriginCost(prod.getOriginCost());
+        item.setProductIntro(prod.getProductIntro());
+        item.setProductPubdate(prod.getProductPubdate());
+        return item;
     }
 
 }

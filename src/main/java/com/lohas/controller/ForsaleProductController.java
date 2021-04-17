@@ -6,16 +6,15 @@ import com.lohas.request.DeleteProductRequest;
 import com.lohas.request.QueryByShopRequest;
 import com.lohas.request.UpdateForsaleProductRequest;
 import com.lohas.service.ForsaleProductService;
+import com.lohas.view.DDLProductItem;
+import com.lohas.view.ForsaleProductItem;
 import com.lohas.view.ForsaleProductPage;
 import com.lohas.view.Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,5 +59,12 @@ public class ForsaleProductController {
     public ForsaleProductPage getForsaleProductOfMine(@RequestBody PaginationSend paginationSend,HttpServletRequest request){
 
         return forsaleProductService.getMyProduct(paginationSend, request);
+    }
+
+    @ApiOperation(value = "根据ID查询折扣商品")
+    @PostMapping(path="/querybyId")
+    @ResponseBody
+    public ForsaleProductItem getForsaleProductById(@RequestParam Integer product_id){
+        return forsaleProductService.getForsaleProductById(product_id);
     }
 }

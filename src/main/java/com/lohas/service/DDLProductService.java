@@ -7,6 +7,7 @@ import com.lohas.model.DDLProduct;
 import com.lohas.model.Shop;
 import com.lohas.request.*;
 import com.lohas.utils.JWTUtils;
+import com.lohas.view.DDLProductItem;
 import com.lohas.view.DDLProductPage;
 import com.lohas.view.ForsaleProductPage;
 import com.lohas.view.Status;
@@ -105,5 +106,21 @@ public class DDLProductService {
         Integer shopId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("shop_id").asString());
         return new DDLProductPage(ddlProductDAO.findAllByShop(shopDAO.findShopByShopId(shopId),
                 PageRequest.of(paginationSend.getPageNum() - 1, paginationSend.getPageSize())));
+    }
+
+    public DDLProductItem getDDLProductById(Integer Id){
+        DDLProduct prod = ddlProductDAO.findByProductId(Id);
+        DDLProductItem item = new DDLProductItem();
+        item.setProductId(prod.getProductId());
+        item.setProductName(prod.getProductName());
+        item.setProductPic(prod.getProductPic());
+        item.setCurrentCost(prod.getCurrentCost());
+        item.setDiscount(prod.getDiscount());
+        item.setExpiryDate(prod.getExpiryDate());
+        item.setOriginCost(prod.getOriginCost());
+        item.setProductIntro(prod.getProductIntro());
+        item.setProductionDate(prod.getProductionDate());
+        item.setProductPubdate(prod.getProductPubdate());
+        return item;
     }
 }
