@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 
+import java.util.ArrayList;
 import java.util.List;
 @Data
 public class MysteryBoxOrderOfShopPage extends PaginationReceive {
@@ -17,9 +18,11 @@ public class MysteryBoxOrderOfShopPage extends PaginationReceive {
     public MysteryBoxOrderOfShopPage(Page<MysteryBoxOrderOfShopInterface> mysteryBoxOrderOfShopInterfacePage){
         setPageNum(mysteryBoxOrderOfShopInterfacePage.getNumber() + 1);
         setTotalPage(mysteryBoxOrderOfShopInterfacePage.getTotalPages());
+        List<MysteryBoxOrderOfShopItem> list = new ArrayList<>();
         for(MysteryBoxOrderOfShopInterface mysteryBoxOrderOfShopInterface : mysteryBoxOrderOfShopInterfacePage){
             MysteryBoxOrderOfShopItem mysteryBoxOrderOfShopItem = new MysteryBoxOrderOfShopItem(mysteryBoxOrderOfShopInterface);
-            mysteryBoxOrderOfShopItems.add(mysteryBoxOrderOfShopItem);
+            list.add(mysteryBoxOrderOfShopItem);
         }
+        setMysteryBoxOrderOfShopItems(list);
     }
 }
