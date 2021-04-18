@@ -35,9 +35,9 @@ public class MysteryBoxOrderService {
         try {
             Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
             Integer todayOrderCount = mysteryBoxOrderDAO.findOrderCountByUserAndDate(userId);
-            if(todayOrderCount>2){
+            if(todayOrderCount>1){
                 status.setState(false);
-                status.setMsg("同一天只能订购两个盲盒");
+                status.setMsg("同一天只能订购一个盲盒");
                 return status;
             }
             MysteryBoxOrder mysteryBoxOrder = new MysteryBoxOrder();
