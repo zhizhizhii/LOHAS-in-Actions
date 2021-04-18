@@ -49,7 +49,7 @@ public class MysteryBoxOrderController {
     @ApiOperation(value = "我的订单（仅用户）")
     @PostMapping(path="/userorder")
     @ResponseBody
-    public MysteryBoxOrderOfUserPage queryMysteryBoxOfUser(PaginationSend paginationSend, HttpServletRequest request){
+    public MysteryBoxOrderOfUserPage queryMysteryBoxOfUser(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
         return mysteryBoxOrderService.queryMysteryBoxOfUser(paginationSend, request);
     }
 }
