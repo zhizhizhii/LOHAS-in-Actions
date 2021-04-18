@@ -36,7 +36,7 @@ public interface UserCommentDAO extends CrudRepository<UserComment,Integer> {
             countQuery = "select\n" +
                     "        count(*) \n" +
                     "    from\n" +
-                    "        user_info as u \n" +
+                    "        shop_info as s \n" +
                     "    join\n" +
                     "        user_comment as c \n" +
                     "            on s.shop_id = c.shop_id \n" +

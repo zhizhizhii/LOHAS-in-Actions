@@ -18,7 +18,7 @@ public class MysteryBoxOrderOfUserPage extends PaginationReceive {
 
     public MysteryBoxOrderOfUserPage(Page<MysteryBoxOrderOfUserInterface> mysteryBoxOrderOfUserInterfacePage){
         setPageNum(mysteryBoxOrderOfUserInterfacePage.getNumber() + 1);
-        setPageNum(mysteryBoxOrderOfUserInterfacePage.getTotalPages());
+        setTotalPage(mysteryBoxOrderOfUserInterfacePage.getTotalPages());
         List<MysteryBoxOrderOfUserItem> list = new ArrayList<>();
         for(MysteryBoxOrderOfUserInterface mysteryBoxOrderOfUserInterface: mysteryBoxOrderOfUserInterfacePage){
             MysteryBoxOrderOfUserItem mysteryBoxOrderOfUserItem = new MysteryBoxOrderOfUserItem(mysteryBoxOrderOfUserInterface);

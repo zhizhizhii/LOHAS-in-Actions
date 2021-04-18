@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TomcatConfig {
-    // 在某配置类中添加如下内容
+    //在某配置类中添加如下内容
     // 监听的http请求的端口,需要在application配置中添加http.port=端口号  如80
     @Value("${http.port}")
     Integer httpPort;

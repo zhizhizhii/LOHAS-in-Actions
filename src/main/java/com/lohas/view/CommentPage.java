@@ -30,7 +30,6 @@ public class CommentPage extends PaginationReceive {
             c.setCommentId(item.getComment_Id());
             c.setContent(item.getContent());
             c.setUserName(item.getUser_Name());
-            System.out.println(item.getComment_Time());
             c.setCommentTime(item.getComment_Time());
             c.setAvatar(item.getAvatar());
             list.add(c);
