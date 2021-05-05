@@ -9,7 +9,6 @@ import com.lohas.request.ShopRequest;
 import com.lohas.utils.HashHelper;
 import com.lohas.utils.JWTUtils;
 import com.lohas.view.Status;
-import javafx.scene.control.TextFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
