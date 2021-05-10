@@ -4,5 +4,5 @@ import java.util.Date;
 
 public interface GreenPointInterface {
     Integer getPoint();
-    Date getOrder_date();
+    String getOrder_date();
 }

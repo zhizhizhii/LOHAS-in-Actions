@@ -23,6 +23,7 @@ public class GreenPointList {
         List<GreenPointItem> list = new ArrayList<>();
         for(GreenPointInterface greenPointInterface:greenPointInterfaceList){
             GreenPointItem greenPointItem = new GreenPointItem(greenPointInterface.getPoint(),greenPointInterface.getOrder_date());
+            list.add(greenPointItem);
         }
         setGreenPointItemList(list);
         setTotalPoint(totalPoint);

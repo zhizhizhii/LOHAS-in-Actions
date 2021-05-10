@@ -58,7 +58,7 @@ public class DDLProductOrderController {
     @ApiOperation(value = "查看分数（仅用户）")
     @PostMapping(path="/greenpoint")
     @ResponseBody
-    public GreenPointList queryGreenPoint(@RequestBody PaginationSend paginationSend, HttpServletRequest request){
-        return ddlProductOrderService.queryGreenPoint(paginationSend, request);
+    public GreenPointList queryGreenPoint(HttpServletRequest request){
+        return ddlProductOrderService.queryGreenPoint(request);
     }
 }

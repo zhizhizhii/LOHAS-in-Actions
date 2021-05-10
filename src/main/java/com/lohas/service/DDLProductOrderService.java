@@ -104,7 +104,7 @@ public class DDLProductOrderService {
         );
         return new MysteryBoxOrderOfUserPage(mysteryBoxOrderOfUserInterfacePage);
     }
-    public GreenPointList queryGreenPoint(PaginationSend paginationSend, HttpServletRequest request){
+    public GreenPointList queryGreenPoint(HttpServletRequest request){
         Integer userId = Integer.valueOf(JWTUtils.getTokenInfo(request.getHeader("token")).getClaim("user_id").asString());
         List<GreenPointInterface> greenPointInterfaceList = ddlProductOrderDAO.getGreenPointOfUser(userId);
         Integer totalPoint = ddlProductOrderDAO.getTotalPoint(userId);

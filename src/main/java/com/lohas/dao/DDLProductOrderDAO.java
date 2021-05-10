@@ -45,7 +45,7 @@ public interface DDLProductOrderDAO extends CrudRepository<DDLProductOrder,Integ
 
     @Query(value="select count(*) as point, date_format(order_time,'%Y-%m-%d') as order_date " +
             "from ddl_product_order " +
-            "where DateDiff(order_time,now())<=7 " +
+            "where DateDiff(order_time,now())<=6 " +
             "and user_id = ? " +
             "group by date_format(order_time,'%Y-%m-%d') "
             ,nativeQuery = true)
