@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class ShopBriefInfoPage extends PaginationReceive {
 
-    @ApiModelProperty(value = "商品信息列表")
+    @ApiModelProperty(value = "商店信息列表")
     @JsonProperty("shop_briefinfo_items")
     private List<ShopBriefInfoItem> shopBriefInfoItems;
 

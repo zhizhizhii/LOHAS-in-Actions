@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GreenPointItem {
+public class GreenPointItem implements Comparable<GreenPointItem>{
     @ApiModelProperty(value = "每日分数")
     private Integer point;
 
@@ -31,5 +31,10 @@ public class GreenPointItem {
         calendar.set(year,month-1,day);
         date=calendar.getTime();
         this.date=date;
+    }
+
+    @Override
+    public int compareTo(GreenPointItem greenPointItem){
+        return this.date.compareTo(greenPointItem.getDate());
     }
 }
