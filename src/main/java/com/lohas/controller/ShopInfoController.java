@@ -1,6 +1,7 @@
 package com.lohas.controller;
 
 import com.lohas.common.PaginationSend;
+import com.lohas.request.QueryShopByTypeAndNameRequest;
 import com.lohas.request.QueryShopInfoByNameRequest;
 import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
@@ -63,10 +64,17 @@ public class ShopInfoController {
     }
 
     @ApiOperation(value="用户根据商店名搜索")
-    @PostMapping(path="/search")
+    @PostMapping(path="/searchbytype")
     @ResponseBody
     public ShopBriefInfoPage getBriefbyName(@RequestBody QueryShopInfoByNameRequest queryShopInfoByNameRequest){
         return shopInfoService.getShopBriefInfoByName(queryShopInfoByNameRequest);
+    }
+
+    @ApiOperation(value="用户根据商店名以及类型搜索")
+    @PostMapping(path="/searchbyboth")
+    @ResponseBody
+    public ShopBriefInfoPage getBriefbyTypeAndName(@RequestBody QueryShopByTypeAndNameRequest queryShopByTypeAndNameRequest){
+        return shopInfoService.getShopBriefInfoByTypeAndName(queryShopByTypeAndNameRequest);
     }
 
     @ApiOperation(value="用户获取商店简略信息+用户是否收藏（需要token）")

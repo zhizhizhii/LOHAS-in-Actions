@@ -6,6 +6,7 @@ import com.lohas.dao.ShopInfoDAO;
 import com.lohas.dao.UserCollectDAO;
 import com.lohas.dao.UserDAO;
 import com.lohas.model.*;
+import com.lohas.request.QueryShopByTypeAndNameRequest;
 import com.lohas.request.QueryShopInfoByNameRequest;
 import com.lohas.request.QueryShopInfoByTypeRequest;
 import com.lohas.request.UpdateShopInfoRequest;
@@ -97,6 +98,22 @@ public class ShopInfoService {
                 PageRequest.of(
                         queryShopInfoByTypeRequest.getPageNum() - 1,
                         queryShopInfoByTypeRequest.getPageSize()
+                )
+        );
+
+        return new ShopBriefInfoPage(page);
+
+    }
+
+
+    public ShopBriefInfoPage getShopBriefInfoByTypeAndName(QueryShopByTypeAndNameRequest queryShopByTypeAndNameRequest){
+
+        Page<ShopInfo> page =  shopInfoDAO.findAllByShopTypeAndShopNameLike(
+                queryShopByTypeAndNameRequest.getShopType(),
+                queryShopByTypeAndNameRequest.getKeyword(),
+                PageRequest.of(
+                        queryShopByTypeAndNameRequest.getPageNum() - 1,
+                        queryShopByTypeAndNameRequest.getPageSize()
                 )
         );
 
